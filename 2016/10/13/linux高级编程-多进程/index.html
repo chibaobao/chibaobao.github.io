@@ -1,0 +1,828 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Linuxc," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.2" />
+
+
+
+
+
+
+<meta name="description" content="多进程
+进程状态: 就绪、运行、挂起、停止等状态
+父子进程共享数据:  fork之后，子进程会拷贝父进程的数据空间、堆和栈空间（实际上是采用写时复制技术），二者共享代码段。
+多进程一定要记得wait回收
+
+多进程相关函数
+fork()
+
+返回值:为0表示当前是子进程,大于0表示当前是父进程并且返回值为子进程pid
+123456789101112131415161718192021222324int">
+<meta property="og:type" content="article">
+<meta property="og:title" content="linux高级编程-多进程">
+<meta property="og:url" content="http://yoursite.com/2016/10/13/linux高级编程-多进程/index.html">
+<meta property="og:site_name" content="chibaobao 的博客">
+<meta property="og:description" content="多进程
+进程状态: 就绪、运行、挂起、停止等状态
+父子进程共享数据:  fork之后，子进程会拷贝父进程的数据空间、堆和栈空间（实际上是采用写时复制技术），二者共享代码段。
+多进程一定要记得wait回收
+
+多进程相关函数
+fork()
+
+返回值:为0表示当前是子进程,大于0表示当前是父进程并且返回值为子进程pid
+123456789101112131415161718192021222324int">
+<meta property="og:updated_time" content="2016-11-01T15:40:04.482Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="linux高级编程-多进程">
+<meta name="twitter:description" content="多进程
+进程状态: 就绪、运行、挂起、停止等状态
+父子进程共享数据:  fork之后，子进程会拷贝父进程的数据空间、堆和栈空间（实际上是采用写时复制技术），二者共享代码段。
+多进程一定要记得wait回收
+
+多进程相关函数
+fork()
+
+返回值:为0表示当前是子进程,大于0表示当前是父进程并且返回值为子进程pid
+123456789101112131415161718192021222324int">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/10/13/linux高级编程-多进程/"/>
+
+
+  <title> linux高级编程-多进程 | chibaobao 的博客 </title>
+</head>
+
+<body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">chibaobao 的博客</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">黄海驰的个人博客</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                linux高级编程-多进程
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-10-13T23:11:24+08:00" content="2016-10-13">
+              2016-10-13
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/编程学习/" itemprop="url" rel="index">
+                    <span itemprop="name">编程学习</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="多进程"><a href="#多进程" class="headerlink" title="多进程"></a>多进程</h1><ul>
+<li>进程状态: 就绪、运行、挂起、停止等状态</li>
+<li>父子进程共享数据:  fork之后，子进程会拷贝父进程的数据空间、堆和栈空间（实际上是采用写时复制技术），二者共享代码段。</li>
+<li>多进程一定要记得wait回收</li>
+</ul>
+<h2 id="多进程相关函数"><a href="#多进程相关函数" class="headerlink" title="多进程相关函数"></a>多进程相关函数</h2><ul>
+<li><p>fork()</p>
+<ul>
+<li><p>返回值:为0表示当前是子进程,大于0表示当前是父进程并且返回值为子进程pid</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">int b=10;</div><div class="line">int main()</div><div class="line">&#123;</div><div class="line">    int pid;</div><div class="line">    int a=10;</div><div class="line">    int *c=(int*)malloc(sizeof(int));</div><div class="line">    *c=10;</div><div class="line">    pid = fork();</div><div class="line">    if(pid == 0)</div><div class="line">    &#123;   </div><div class="line">        a=100;</div><div class="line">        b=100;</div><div class="line">        *c=100;</div><div class="line">        printf(&quot;child:a=%d,b=%d,c=%d\n&quot;,a,b,*c);//结果为100,100,100</div><div class="line">    &#125;   </div><div class="line">    else</div><div class="line">    &#123;   </div><div class="line">        a=101;</div><div class="line">        b=101;</div><div class="line">        *c=101;</div><div class="line">        printf(&quot;parent:a=%d,b=%d,c=%d\n&quot;,a,b,*c);//结果为101,101,101</div><div class="line">    &#125;   </div><div class="line">    return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>getpid()</p>
+<ul>
+<li>获取当前进程进程ID</li>
+</ul>
+</li>
+<li>getppid()<ul>
+<li>获取当前进程的父进程ID</li>
+</ul>
+</li>
+<li>getuid() getgid()<ul>
+<li>获取当前进程uid和gid</li>
+</ul>
+</li>
+</ul>
+<h2 id="exec函数族"><a href="#exec函数族" class="headerlink" title="exec函数族"></a>exec函数族</h2><p><strong>注意</strong>：arg最后一个传NULL</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">eg:execlp(<span class="string">"echo"</span>,<span class="string">"echo"</span>,<span class="string">"hello"</span>, <span class="literal">NULL</span>);</div><div class="line"><span class="comment">//arg 分别包括命令，参数，NULL</span></div><div class="line"></div><div class="line">execlp(<span class="string">"echo"</span>,<span class="string">"hello"</span>, <span class="literal">NULL</span>);<span class="comment">//是错误的</span></div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">int execl(const char *path, const char *arg, ...);</div><div class="line">int execlp(const char *file, const char *arg, ...);</div><div class="line">int execle(const char *path, const char *arg, ..., char *const envp[]);</div><div class="line">int execv(const char *path, char *const argv[]);</div><div class="line">int execvp(const char *file, char *const argv[]);</div><div class="line">int execve(const char *path, char *const argv[], char *const envp[]);</div></pre></td></tr></table></figure>
+<h2 id="子进程回收"><a href="#子进程回收" class="headerlink" title="子进程回收"></a>子进程回收</h2><h3 id="孤儿进程与僵尸进程"><a href="#孤儿进程与僵尸进程" class="headerlink" title="孤儿进程与僵尸进程"></a>孤儿进程与僵尸进程</h3><ul>
+<li>孤儿进程: 父进程先于子进程结束，则子进程成为孤儿进程，子进程的父进程成为init进程，称为init进程领养孤儿进程。</li>
+<li>僵尸进程: 进程终止，父进程尚未回收，子进程残留资源（PCB）存放于内核中，变成僵尸（Zombie）进程。</li>
+</ul>
+<h3 id="wait相关函数"><a href="#wait相关函数" class="headerlink" title="wait相关函数"></a>wait相关函数</h3><ul>
+<li><p>pid_t wait(int *status);</p>
+<ul>
+<li>功能:阻塞,回收一个子进程</li>
+<li>返回值:成功：清理掉的子进程ID；失败：-1 (没有子进程)</li>
+<li><p>参数:传出参数(宏)</p>
+<ol>
+<li>WIFEXITED(status) 为非0    → 进程正常结束<br>WEXITSTATUS(status) 如上宏为真，使用此宏 → 获取进程退出状态 (exit的参数)<ol>
+<li>WIFSIGNALED(status) 为非0 → 进程异常终止<br>WTERMSIG(status) 如上宏为真，使用此宏 → 取得使进程终止的那个信号的编号。</li>
+<li>WIFSTOPPED(status) 为非0 → 进程处于暂停状态<br>WSTOPSIG(status) 如上宏为真，使用此宏 → 取得使进程暂停的那个信号的编号。<br>WIFCONTINUED(status) 为真 → 进程暂停后已经继续运行</li>
+</ol>
+</li>
+</ol>
+</li>
+</ul>
+</li>
+<li><p>pid_t waitpid(pid_t pid, int *status, in options);</p>
+<ul>
+<li>功能:</li>
+<li>返回值:    成功：返回清理掉的子进程ID；失败：-1(无子进程)</li>
+<li><p>参数:</p>
+<ul>
+<li><p>pid</p>
+<ul>
+<li><blockquote>
+<p>0 回收指定ID的子进程    </p>
+</blockquote>
+</li>
+<li>-1 回收任意子进程（相当于wait）</li>
+<li>0 回收和当前调用waitpid一个组的所有子进程</li>
+<li>&lt; -1 回收指定进程组内的任意子进程</li>
+</ul>
+</li>
+<li><p>status     </p>
+<ul>
+<li>与wait相同</li>
+</ul>
+</li>
+<li><p>options</p>
+<ul>
+<li>WNOHANG 不阻塞</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">while(1)</div><div class="line">   &#123;</div><div class="line">          pid = waitpid(0,NULL,WNOHANG);//WNOHANG不阻塞,三个返回值 0代表当前无子进程退出,&gt;0代表有子进程退出,-1代表所有子进程意见回收完毕</div><div class="line">          if(pid &gt; 0)</div><div class="line">              printf(&quot;relase pid %d\n&quot;,pid);</div><div class="line">          if(pid &lt; 0)</div><div class="line">              break;         </div><div class="line">          sleep(1);</div><div class="line">  &#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="进程间通信"><a href="#进程间通信" class="headerlink" title="进程间通信"></a>进程间通信</h2><ol>
+<li>管道 (使用最简单)</li>
+<li>信号 (开销最小)</li>
+<li>共享内存 (无血缘关系)</li>
+<li>本地套接字 (最稳定)</li>
+</ol>
+<h3 id="管道"><a href="#管道" class="headerlink" title="管道"></a>管道</h3><h4 id="管道-pipe"><a href="#管道-pipe" class="headerlink" title="管道(pipe)"></a>管道(pipe)</h4><p>只能父子进程通信使用</p>
+<ul>
+<li>int pipe(int pipefd[2]);<ul>
+<li>成功：0；失败：-1，设置errno</li>
+</ul>
+</li>
+<li><p>使用方法</p>
+<ol>
+<li>int fd[2];//创建pipe文件描述符数组</li>
+<li><p>pipe(fd);//初始化fd为两个管道fd[0]为读端,fd[1]为写端</p>
+<ul>
+<li>父/子进程  关闭读端,向写端写数据</li>
+<li>子/父进程  关闭写端,从读端读数据</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line">int main()</div><div class="line">&#123;</div><div class="line">    printf(&quot;begin\n&quot;);</div><div class="line">    int fd[2];</div><div class="line">    if(pipe(fd) == -1)//创建管道,fd[2]会被初始化,之后可以直接使用</div><div class="line">    &#123;</div><div class="line">        perror(&quot;pipe err&quot;);</div><div class="line">        exit(1);</div><div class="line">    &#125;</div><div class="line">    pid_t pid = fork();</div><div class="line">    if(pid == -1)</div><div class="line">    &#123;</div><div class="line">        perror(&quot;fork err:&quot;);</div><div class="line">        exit(1);</div><div class="line">    &#125;</div><div class="line">    else if(pid &gt; 0)</div><div class="line">    &#123;</div><div class="line">        close(fd[1]);//父进程关闭写端</div><div class="line">        dup2(fd[0],STDIN_FILENO);//将管道读端拷贝给标准输入</div><div class="line">        execlp(&quot;wc&quot;,&quot;wc&quot;,&quot;-l&quot;,NULL);//执行wc</div><div class="line">        close(fd[0]);</div><div class="line">    &#125;</div><div class="line">    else</div><div class="line">    &#123;</div><div class="line">        close(fd[0]);//fd[0]代表读端,子进程关闭读端</div><div class="line">        dup2(fd[1],STDOUT_FILENO);//将管道写端拷贝给标准输出</div><div class="line">        execlp(&quot;ls&quot;,&quot;ls&quot;,NULL);</div><div class="line">        close(fd[1]);</div><div class="line">    &#125;</div><div class="line">    return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+</li>
+</ul>
+<h4 id="管道-fifo"><a href="#管道-fifo" class="headerlink" title="管道(fifo)"></a>管道(fifo)</h4><ul>
+<li>int mkfifo(const char *pathname,  mode_t mode);  成功：0； 失败：-1</li>
+<li><p>使用方法:</p>
+<ol>
+<li>$   mkfifo 管道名<br> 创建管道文件</li>
+<li>特点:<ul>
+<li>没有读端读取,写端阻塞     </li>
+<li>不可重复读取(读走了数据数据就没有了), <strong><em>fifo文件实现方式是队列</em></strong></li>
+</ul>
+</li>
+<li><p>代码:</p>
+<ol>
+<li>int fd[2];</li>
+<li>写端</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">int main(int argc, char *argv[])</div><div class="line">&#123;</div><div class="line">    int fd, i;</div><div class="line">    char buf[4096];</div><div class="line">    fd = open(&quot;fifo_file&quot;, O_WRONLY);</div><div class="line">    sprintf(buf, &quot;hello itcast\n&quot;);</div><div class="line">    write(fd, buf, strlen(buf));//没有读端读取就会阻塞</div><div class="line">    //sleep(5);</div><div class="line">    close(fd);</div><div class="line"></div><div class="line">    return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>读端</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">int main(int argc, char *argv[])</div><div class="line">&#123;</div><div class="line">    int fd, len;</div><div class="line">    char buf[4096];</div><div class="line">    fd = open(&quot;fifo_file&quot;, O_RDONLY);</div><div class="line">    //sleep(3);</div><div class="line">    len = read(fd, buf, sizeof(buf));</div><div class="line">    write(STDOUT_FILENO, buf, len);</div><div class="line">    close(fd);    </div><div class="line">    return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+</li>
+</ul>
+<h3 id="信号"><a href="#信号" class="headerlink" title="信号"></a>信号</h3><p>$ kill -l查看信号</p>
+<ul>
+<li><p>注册信号signal</p>
+<ul>
+<li>sighandler_t signal(int signum, sighandler_t handler);</li>
+<li>signum信号编号（一般用信号的宏）</li>
+<li>handler 函数指针（函数为void fun(int signum)格式的回调函数）</li>
+</ul>
+</li>
+<li><p>发送信号kill(pid,sig);发送信号给pid进程，</p>
+<ul>
+<li>pid&gt;0进程号，pid=0同组进程，pid=-1所有可送达的进程，pid&lt;-1组id绝对值。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div></pre></td><td class="code"><pre><div class="line">信号相关各种操作（拓展）</div><div class="line">信号：（名称，编号，处理动作，发生条件）---&gt;软中断</div><div class="line">	</div><div class="line">信号</div><div class="line">	pending----&gt; | mask 阻塞(置1后时pengding被置1的位无法送达)  </div><div class="line">	产生---&gt;未决  |----&gt;递达</div><div class="line">				 |</div><div class="line">				</div><div class="line">	默认处理动作：	term：终止进程</div><div class="line">					core：终止进程，并产生core文件</div><div class="line">					ign ：忽略</div><div class="line">					stop：暂停</div><div class="line">					cont：继续</div><div class="line">kill(pid,sig);发送信号给pid进程，pid&gt;0进程号，pid=0同组进程，pid=-1所有可送达的进程，pid&lt;-1组id绝对值，</div><div class="line">raise(sig);	向本进程发送sig</div><div class="line"></div><div class="line"></div><div class="line">alarm(time)//设置时钟返回上次时钟剩余时间，time秒后发送SIGALRM</div><div class="line">int setitimer(int which, const struct itimerval *new_value,struct itimerval *old_value)//</div><div class="line">struct itimerval &#123;</div><div class="line">					struct timeval it_interval; /* next value */</div><div class="line">					struct timeval it_value;    /* current value */</div><div class="line">				&#125;;</div><div class="line"></div><div class="line">struct timeval &#123;</div><div class="line">					time_t      tv_sec;         /* seconds */</div><div class="line">					suseconds_t tv_usec;        /* microseconds */</div><div class="line">				&#125;;</div><div class="line"></div><div class="line">				</div><div class="line">				</div><div class="line">信号操作函数：</div><div class="line">信号集 set</div><div class="line">			</div><div class="line">			sigset_t   set;</div><div class="line"></div><div class="line">			sigemptyset（&amp;set）  清空集合  </div><div class="line"></div><div class="line">			sigfillset（&amp;set）  置1集合  </div><div class="line"></div><div class="line">			sigaddset（&amp;set， 待添加的信号名称） 添加信号到集合中</div><div class="line"></div><div class="line">			sigdelset（&amp;set， 待删除的信号名称） 删除信号到集合中</div><div class="line"></div><div class="line">			sigismember（&amp;set， 待判断的信号名称）判断信号是否在集合中  -- 》 1：在 0：不在； -1；错</div><div class="line">mask操作</div><div class="line"></div><div class="line">			  int sigprocmask(int how, const sigset_t *set, sigset_t *oldset);</div><div class="line"></div><div class="line">				参1： 	SIG_BLOCK  将set中的信号添加到mask屏蔽字中</div><div class="line"></div><div class="line">				 	SIG_UNBLOCK  将set中的信号从mask屏蔽字中接触屏蔽</div><div class="line"></div><div class="line">					SIG_SETMASK  用set覆盖mask</div><div class="line"></div><div class="line">				参2：  用来操作mask的set集合</div><div class="line"></div><div class="line">				参3：	记录旧有mask的状态。</div><div class="line"></div><div class="line">pending操作</div><div class="line"></div><div class="line">			int sigpending(sigset_t *set);</div><div class="line"></div><div class="line">			参数： 传出的未决信号集</div><div class="line"></div><div class="line">			返回值：成0失败-1 errno</div><div class="line"></div><div class="line"></div><div class="line">signal(sig,funtion)//sig信号绑定funtion函数</div><div class="line">int sigaction(int signum, const struct sigaction *act,struct sigaction *oldact);</div><div class="line">struct sigaction &#123;</div><div class="line">					void     (*sa_handler)(int);//要绑定的函数,通过宏，可以设置执行默认动作或者忽略</div><div class="line">					void     (*sa_sigaction)(int, siginfo_t *, void *);</div><div class="line">					sigset_t   sa_mask;//函数指向期间的mask值</div><div class="line">					int        sa_flags;//默认为0，表示动作执行期间本信号忽略</div><div class="line">					void     (*sa_restorer)(void);</div><div class="line">				&#125;;</div></pre></td></tr></table></figure>
+<h3 id="共享内存"><a href="#共享内存" class="headerlink" title="共享内存"></a>共享内存</h3><h4 id="mmap"><a href="#mmap" class="headerlink" title="mmap"></a>mmap</h4><ul>
+<li>void <em>mmap(void </em>addr, size_t length, int prot, int flags, int fd, off_t offset);</li>
+<li><p>int munmap(void *addr, size_t length);//解除共享内存<br>参数：</p>
+<ul>
+<li>addr：传出参数，指向共享内存地址</li>
+<li>length：共享内存长度（必须是1024整数倍，是整页）</li>
+<li><p>prot：共享内存的读写权限</p>
+<pre><code>PROT_EXEC //页内容可以被执行
+PROT_READ //页内容可以被读取（常用）
+PROT_WRITE //页可以被写入（常用）
+PROT_NONE //页不可访问
+</code></pre></li>
+<li><p>flags：共享内存模式</p>
+<pre><code>MAP_ANONYMOUS //匿名映射
+MAP_SHARED //与其它所有映射这个对象的进程共享映射空间（常用）
+</code></pre></li>
+<li><p>fd：共享文件的描述符</p>
+</li>
+<li>offset：从文件fd中的开始位置<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">int main(void)</div><div class="line">&#123;</div><div class="line">	char *mem;</div><div class="line"></div><div class="line">//	int fd = open(&quot;hello244&quot;, O_RDONLY|O_CREAT|O_TRUNC, 0644);</div><div class="line">	int fd = open(&quot;dict.txt&quot;, O_RDWR);</div><div class="line">	if (fd &lt; 0)</div><div class="line">		sys_err(&quot;open error&quot;);</div><div class="line">/*</div><div class="line">	   len = lseek(fd, 3, SEEK_SET);   //获取文件大小,根据文件大小创建映射区</div><div class="line">	   write(fd, &quot;e&quot;, 1);              //实质性完成文件拓展</div><div class="line">	   printf(&quot;The length of file = %d\n&quot;, len);</div><div class="line">*/</div><div class="line">	mem = mmap(NULL, 1024, PROT_READ|PROT_WRITE, MAP_SHARED, fd, 0);</div><div class="line">	if (mem == MAP_FAILED)            //出错判断</div><div class="line">		sys_err(&quot;mmap err: &quot;);</div><div class="line"></div><div class="line">	close(fd);</div><div class="line"></div><div class="line">	strcpy(mem, &quot;xxx&quot;);</div><div class="line">	printf(&quot;%s\n&quot;, mem);</div><div class="line"></div><div class="line">	if (munmap(mem,  1024) &lt; 0)</div><div class="line">		sys_err(&quot;munmap&quot;);</div><div class="line"></div><div class="line">	return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="shmat"><a href="#shmat" class="headerlink" title="shmat"></a>shmat</h4><ul>
+<li><p>shmget获取（创建）一块共享内存</p>
+<ul>
+<li>int shmget(key_t key, size_t size, int shmflg) 返回shmid</li>
+<li>key：内存编号</li>
+<li>size：内存大小</li>
+<li>shmflg：内存权限eg:0660|IPC_CREAT若不存在创建</li>
+</ul>
+</li>
+<li><p>shmat链接共享内存</p>
+<ul>
+<li>void <em>shmat(int shmid, const void </em>shmaddr, int shmflg)</li>
+<li>shmid：共享内存id</li>
+<li>shmaddr：指定共享内存地址（一般传NULL,由内核指定）</li>
+<li>shmflg：一般传0，表示可读可写</li>
+</ul>
+</li>
+<li><p>shmdt(p);取消连接共享内存        </p>
+<ul>
+<li>int shmdt(const void *shmaddr)</li>
+</ul>
+</li>
+<li>shmctl删除共享内存<ul>
+<li>shmctl(int shmid, int cmd, struct shmid_ds *buf);</li>
+<li>cmd：IPC_RMID删除这片共享内存</li>
+<li>buf共享内存管理结构体。一般传空<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">int</span> shmid = <span class="number">0</span>;</div><div class="line">	<span class="comment">//创建共享内存</span></div><div class="line">	<span class="comment">//相当于打开共享内存( 打开文件)</span></div><div class="line">	<span class="comment">//若文件存在  则使用旧的 </span></div><div class="line">	<span class="comment">//若文件不存在 则创建</span></div><div class="line">	shmid = shmget(<span class="number">0x1111</span>, <span class="number">100</span>, <span class="number">0666</span> |IPC_CREAT );</div><div class="line">	<span class="keyword">if</span> (shmid &lt; <span class="number">0</span>)</div><div class="line">	&#123;</div><div class="line">		<span class="built_in">printf</span>(<span class="string">"func shmget() err\n"</span>);</div><div class="line">		<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">	&#125;</div><div class="line">	<span class="built_in">printf</span>(<span class="string">"创建共享内存 ok\n"</span>);</div><div class="line">	</div><div class="line">	</div><div class="line">	<span class="comment">//连接共享内存</span></div><div class="line">	<span class="comment">//	void *shmat(int shmid, const void *shmaddr, int shmflg);</span></div><div class="line">	</div><div class="line">    <span class="keyword">void</span> *p = shmat(shmid, <span class="literal">NULL</span>, <span class="number">0</span>);</div><div class="line">    <span class="built_in">printf</span>(<span class="string">"%d\n"</span>,p);</div><div class="line">    </div><div class="line">    <span class="built_in">strcpy</span>((<span class="keyword">char</span> *)p, <span class="string">"111122234344"</span>);   </div><div class="line">    <span class="built_in">printf</span>(<span class="string">"p:%s \n"</span>, p);    </div><div class="line">    <span class="built_in">printf</span>(<span class="string">"任意键删除连共享内存\n"</span>);</div><div class="line">    getchar();</div><div class="line">	<span class="comment">//取消连接共享内存</span></div><div class="line">	shmdt(p);</div><div class="line">	<span class="comment">//删除共享内存</span></div><div class="line">    shmctl(shmid, IPC_RMID, <span class="literal">NULL</span>);</div><div class="line">    </div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="本地套接字"><a href="#本地套接字" class="headerlink" title="本地套接字"></a>本地套接字</h3><p> socket(AF_UNIX, SOCK_STREAM, 0)</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Linuxc/" rel="tag">#Linuxc</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/10/12/加密基础/" rel="next" title="加密基础">
+                <i class="fa fa-chevron-left"></i> 加密基础
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/10/23/makefile-and-gcc/" rel="prev" title="makefile_and_gcc">
+                makefile_and_gcc <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="chibaobao" />
+          <p class="site-author-name" itemprop="name">chibaobao</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">13</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/chibaobao" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#多进程"><span class="nav-number">1.</span> <span class="nav-text">多进程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#多进程相关函数"><span class="nav-number">1.1.</span> <span class="nav-text">多进程相关函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#exec函数族"><span class="nav-number">1.2.</span> <span class="nav-text">exec函数族</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#子进程回收"><span class="nav-number">1.3.</span> <span class="nav-text">子进程回收</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#孤儿进程与僵尸进程"><span class="nav-number">1.3.1.</span> <span class="nav-text">孤儿进程与僵尸进程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#wait相关函数"><span class="nav-number">1.3.2.</span> <span class="nav-text">wait相关函数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#进程间通信"><span class="nav-number">1.4.</span> <span class="nav-text">进程间通信</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#管道"><span class="nav-number">1.4.1.</span> <span class="nav-text">管道</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#管道-pipe"><span class="nav-number">1.4.1.1.</span> <span class="nav-text">管道(pipe)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#管道-fifo"><span class="nav-number">1.4.1.2.</span> <span class="nav-text">管道(fifo)</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#信号"><span class="nav-number">1.4.2.</span> <span class="nav-text">信号</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#共享内存"><span class="nav-number">1.4.3.</span> <span class="nav-text">共享内存</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#mmap"><span class="nav-number">1.4.3.1.</span> <span class="nav-text">mmap</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#shmat"><span class="nav-number">1.4.3.2.</span> <span class="nav-text">shmat</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#本地套接字"><span class="nav-number">1.4.4.</span> <span class="nav-text">本地套接字</span></a></li></ol></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">chibaobao</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>

@@ -1,0 +1,688 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="github," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.2" />
+
+
+
+
+
+
+<meta name="description" content="github 使用githhub中的名词
+Issue:(任务问题)创建pull Request 时会被创建，
+Wiki:开发文档或手册
+Pull Request:合并请求的仓库
+
+git仓库本地使用
+init  初始化本地仓库
+编写文件
+如：vim a.c 
+
+
+提交和添加
+ 3.1. 添加到缓存区 add a.c 3.2.  提交 commit
+
+commit a.c">
+<meta property="og:type" content="article">
+<meta property="og:title" content="git使用入门">
+<meta property="og:url" content="http://yoursite.com/2016/10/09/git使用入门/index.html">
+<meta property="og:site_name" content="chibaobao 的博客">
+<meta property="og:description" content="github 使用githhub中的名词
+Issue:(任务问题)创建pull Request 时会被创建，
+Wiki:开发文档或手册
+Pull Request:合并请求的仓库
+
+git仓库本地使用
+init  初始化本地仓库
+编写文件
+如：vim a.c 
+
+
+提交和添加
+ 3.1. 添加到缓存区 add a.c 3.2.  提交 commit
+
+commit a.c">
+<meta property="og:updated_time" content="2016-11-01T08:22:30.688Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="git使用入门">
+<meta name="twitter:description" content="github 使用githhub中的名词
+Issue:(任务问题)创建pull Request 时会被创建，
+Wiki:开发文档或手册
+Pull Request:合并请求的仓库
+
+git仓库本地使用
+init  初始化本地仓库
+编写文件
+如：vim a.c 
+
+
+提交和添加
+ 3.1. 添加到缓存区 add a.c 3.2.  提交 commit
+
+commit a.c">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/10/09/git使用入门/"/>
+
+
+  <title> git使用入门 | chibaobao 的博客 </title>
+</head>
+
+<body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">chibaobao 的博客</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">黄海驰的个人博客</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                git使用入门
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-10-09T18:44:46+08:00" content="2016-10-09">
+              2016-10-09
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/github相关/" itemprop="url" rel="index">
+                    <span itemprop="name">github相关</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="github-使用"><a href="#github-使用" class="headerlink" title="github 使用"></a>github 使用</h1><h2 id="githhub中的名词"><a href="#githhub中的名词" class="headerlink" title="githhub中的名词"></a>githhub中的名词</h2><ul>
+<li>Issue:(任务问题)创建pull Request 时会被创建，</li>
+<li>Wiki:开发文档或手册</li>
+<li>Pull Request:合并请求的仓库</li>
+</ul>
+<h2 id="git仓库本地使用"><a href="#git仓库本地使用" class="headerlink" title="git仓库本地使用"></a>git仓库本地使用</h2><ol>
+<li>init  初始化本地仓库</li>
+<li>编写文件<ul>
+<li>如：vim a.c </li>
+</ul>
+</li>
+<li><p>提交和添加</p>
+<p> 3.1. 添加到缓存区 add a.c<br> 3.2.  提交 commit</p>
+<ul>
+<li>commit a.c                            提交a.c</li>
+<li><p>commit -m  “aaa”                  提交缓存区中全部内容，并添加信息aaa</p>
+<p>3.1and2.<br>commit -am “abc”             提交且添加相当于3.1加3.2</p>
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="本地仓库连接远程仓库"><a href="#本地仓库连接远程仓库" class="headerlink" title="本地仓库连接远程仓库"></a>本地仓库连接远程仓库</h2><p>git push -u origin(标识符) master(分支名)  将master推送到origin</p>
+<ol>
+<li>配置好ssh</li>
+<li>git remote add origin(标识符) git@…….  添加远程仓库</li>
+<li>git push -u origin(标识符) master(分支名)  将master推送到origin</li>
+</ol>
+<p><strong><em>注意</em></strong>：同步远程仓库正确做法</p>
+<ol>
+<li>pull</li>
+<li>改代码</li>
+<li>pull</li>
+<li>commit</li>
+<li>push</li>
+</ol>
+<h2 id="git常用命令"><a href="#git常用命令" class="headerlink" title="git常用命令"></a>git常用命令</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">git init : 初始化当前目录为git仓库</div><div class="line">git status 查看git仓库状态</div><div class="line">git add filename--&gt;git commit filename 提交到缓存区--&gt;保存到仓库</div><div class="line">git commit -m &quot;abc&quot;  记述提交信息(不是第一次提交可直接用该命令)</div><div class="line">git commit -am &quot;abc&quot;  合并了add和commit -a两个命令</div><div class="line">git log  :查看(以当前状态为终点的)日志文件</div><div class="line">git log --pretty=short :只查看提交的第一条信息</div><div class="line">git reflog 查看当前仓库执行过的操作日志</div><div class="line">git log filename   :只查看filename文件记录</div><div class="line">git diff  :查看工作树与暂存区的区别</div><div class="line">git diff HEAD :查看工作树与最新一次提交的区别</div><div class="line">git branch  :查看分支</div><div class="line">git branch -a 同时查看当前分支和远程分支</div><div class="line">git checkout -b name  :创建名为name的分支并进入</div><div class="line">=git branch name  +  git  checkout name</div><div class="line">git checkout -  切换到上一个分支</div><div class="line">git merge --no-ff name  将名为name的分支合并的主干，并记录</div><div class="line">git reset --hard 哈希值  ：回溯到该哈希值的位置</div><div class="line">git commit --amend   :修改提交的commit内容</div><div class="line">git rebase -i HEAD~2 将最后两次HEAD值的修改合并(合并小错误) </div><div class="line">git remote origin(标识符) git@.......  添加远程仓库</div><div class="line">git push -u origin(标识符) master(分支名)  将master推送到origin</div><div class="line">git clone git@....  下载远程仓库到本地目录(注意本地目录不能已经存在仓库).</div><div class="line">git clone -b 分支名 git@....  下载远程仓库到本地目录(指定分支)</div><div class="line">git push &lt;--&gt;git pull 将当前分支同步到远程仓库，从远程仓库同步到本地仓库</div></pre></td></tr></table></figure>
+<h2 id="git冲突解决"><a href="#git冲突解决" class="headerlink" title="git冲突解决"></a>git冲突解决</h2><p>如果git pull  如果本地代码 和远程代码出现冲突，需要手动解决。</p>
+<ol>
+<li><p>git stash  //将本地文件 回馈 上一步操作</p>
+</li>
+<li><p>在上一个版本下，执行git pull 将新代码下载下来</p>
+</li>
+<li><p>回复最后写的代码 git stash pop</p>
+</li>
+<li><p>解决冲突部分：查看冲突文件，里面会有 &lt;&lt;&lt;&lt;&lt;  和 &gt;&gt;&gt;&gt;&gt;这里之中就是本地和远程的冲突的部分，手动去解决</p>
+</li>
+<li><p>然后再 git pull, git commit , git push </p>
+</li>
+</ol>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/github/" rel="tag">#github</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/10/09/markdown/" rel="prev" title="markdown">
+                markdown <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="chibaobao" />
+          <p class="site-author-name" itemprop="name">chibaobao</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">13</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/chibaobao" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#github-使用"><span class="nav-number">1.</span> <span class="nav-text">github 使用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#githhub中的名词"><span class="nav-number">1.1.</span> <span class="nav-text">githhub中的名词</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#git仓库本地使用"><span class="nav-number">1.2.</span> <span class="nav-text">git仓库本地使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#本地仓库连接远程仓库"><span class="nav-number">1.3.</span> <span class="nav-text">本地仓库连接远程仓库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#git常用命令"><span class="nav-number">1.4.</span> <span class="nav-text">git常用命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#git冲突解决"><span class="nav-number">1.5.</span> <span class="nav-text">git冲突解决</span></a></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">chibaobao</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>
