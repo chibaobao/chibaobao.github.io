@@ -84,61 +84,16 @@
 
 
 
-<meta name="description" content="Linux获取系统时间c函数注意事项获取当前时间获得当前系统时间
-
-time(&amp;amp;now);
-获取当前时间（是一个长整形时间戳）
-
-
-timenow = localtime(&amp;amp;now);
-转化为一个结构体，结构体成员包括十分月日年
-
-
-asctime_r(timenow,strtemp);或asctime(timenow);
-将结构体转化为字符串
-
-
-
-123456789101112">
+<meta name="description" content="Linux&amp;#x83B7;&amp;#x53D6;&amp;#x7CFB;&amp;#x7EDF;&amp;#x65F6;&amp;#x95F4;c&amp;#x51FD;&amp;#x6570;&amp;#x6CE8;&amp;#x610F;&amp;#x4E8B;&amp;#x9879;&amp;#x83B7;&amp;#x53D6;&amp;#x5F53;&amp;#x524D;&amp;#x65F6;&amp;#x95F4;&amp;#x83B7;&amp;#x5F97;&amp;#x5F53;&amp;#x524D;&amp;#x7CFB;&amp;#x7EDF;&amp;#">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Linux获取系统时间c函数注意事项">
 <meta property="og:url" content="http://yoursite.com/2016/11/06/Linux获取系统时间c函数注意事项/index.html">
 <meta property="og:site_name" content="chibaobao 的博客">
-<meta property="og:description" content="Linux获取系统时间c函数注意事项获取当前时间获得当前系统时间
-
-time(&amp;amp;now);
-获取当前时间（是一个长整形时间戳）
-
-
-timenow = localtime(&amp;amp;now);
-转化为一个结构体，结构体成员包括十分月日年
-
-
-asctime_r(timenow,strtemp);或asctime(timenow);
-将结构体转化为字符串
-
-
-
-123456789101112">
+<meta property="og:description" content="Linux&amp;#x83B7;&amp;#x53D6;&amp;#x7CFB;&amp;#x7EDF;&amp;#x65F6;&amp;#x95F4;c&amp;#x51FD;&amp;#x6570;&amp;#x6CE8;&amp;#x610F;&amp;#x4E8B;&amp;#x9879;&amp;#x83B7;&amp;#x53D6;&amp;#x5F53;&amp;#x524D;&amp;#x65F6;&amp;#x95F4;&amp;#x83B7;&amp;#x5F97;&amp;#x5F53;&amp;#x524D;&amp;#x7CFB;&amp;#x7EDF;&amp;#">
 <meta property="og:updated_time" content="2016-11-06T13:04:23.479Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux获取系统时间c函数注意事项">
-<meta name="twitter:description" content="Linux获取系统时间c函数注意事项获取当前时间获得当前系统时间
-
-time(&amp;amp;now);
-获取当前时间（是一个长整形时间戳）
-
-
-timenow = localtime(&amp;amp;now);
-转化为一个结构体，结构体成员包括十分月日年
-
-
-asctime_r(timenow,strtemp);或asctime(timenow);
-将结构体转化为字符串
-
-
-
-123456789101112">
+<meta name="twitter:description" content="Linux&amp;#x83B7;&amp;#x53D6;&amp;#x7CFB;&amp;#x7EDF;&amp;#x65F6;&amp;#x95F4;c&amp;#x51FD;&amp;#x6570;&amp;#x6CE8;&amp;#x610F;&amp;#x4E8B;&amp;#x9879;&amp;#x83B7;&amp;#x53D6;&amp;#x5F53;&amp;#x524D;&amp;#x65F6;&amp;#x95F4;&amp;#x83B7;&amp;#x5F97;&amp;#x5F53;&amp;#x524D;&amp;#x7CFB;&amp;#x7EDF;&amp;#">
 
 
 
@@ -350,24 +305,24 @@ asctime_r(timenow,strtemp);或asctime(timenow);
       
 
       
-        <h1 id="Linux获取系统时间c函数注意事项"><a href="#Linux获取系统时间c函数注意事项" class="headerlink" title="Linux获取系统时间c函数注意事项"></a>Linux获取系统时间c函数注意事项</h1><h2 id="获取当前时间"><a href="#获取当前时间" class="headerlink" title="获取当前时间"></a>获取当前时间</h2><p>获得当前系统时间</p>
+        <h1 id="Linux&#x83B7;&#x53D6;&#x7CFB;&#x7EDF;&#x65F6;&#x95F4;c&#x51FD;&#x6570;&#x6CE8;&#x610F;&#x4E8B;&#x9879;"><a href="#Linux&#x83B7;&#x53D6;&#x7CFB;&#x7EDF;&#x65F6;&#x95F4;c&#x51FD;&#x6570;&#x6CE8;&#x610F;&#x4E8B;&#x9879;" class="headerlink" title="Linux&#x83B7;&#x53D6;&#x7CFB;&#x7EDF;&#x65F6;&#x95F4;c&#x51FD;&#x6570;&#x6CE8;&#x610F;&#x4E8B;&#x9879;"></a>Linux&#x83B7;&#x53D6;&#x7CFB;&#x7EDF;&#x65F6;&#x95F4;c&#x51FD;&#x6570;&#x6CE8;&#x610F;&#x4E8B;&#x9879;</h1><h2 id="&#x83B7;&#x53D6;&#x5F53;&#x524D;&#x65F6;&#x95F4;"><a href="#&#x83B7;&#x53D6;&#x5F53;&#x524D;&#x65F6;&#x95F4;" class="headerlink" title="&#x83B7;&#x53D6;&#x5F53;&#x524D;&#x65F6;&#x95F4;"></a>&#x83B7;&#x53D6;&#x5F53;&#x524D;&#x65F6;&#x95F4;</h2><p>&#x83B7;&#x5F97;&#x5F53;&#x524D;&#x7CFB;&#x7EDF;&#x65F6;&#x95F4;</p>
 <ol>
 <li>time(&amp;now);<ul>
-<li>获取当前时间（是一个长整形时间戳）</li>
+<li>&#x83B7;&#x53D6;&#x5F53;&#x524D;&#x65F6;&#x95F4;&#xFF08;&#x662F;&#x4E00;&#x4E2A;&#x957F;&#x6574;&#x5F62;&#x65F6;&#x95F4;&#x6233;&#xFF09;</li>
 </ul>
 </li>
 <li>timenow = localtime(&amp;now);<ul>
-<li>转化为一个结构体，结构体成员包括十分月日年</li>
+<li>&#x8F6C;&#x5316;&#x4E3A;&#x4E00;&#x4E2A;&#x7ED3;&#x6784;&#x4F53;&#xFF0C;&#x7ED3;&#x6784;&#x4F53;&#x6210;&#x5458;&#x5305;&#x62EC;&#x5341;&#x5206;&#x6708;&#x65E5;&#x5E74;</li>
 </ul>
 </li>
-<li>asctime_r(timenow,strtemp);或asctime(timenow);<ul>
-<li>将结构体转化为字符串</li>
+<li>asctime_r(timenow,strtemp);&#x6216;asctime(timenow);<ul>
+<li>&#x5C06;&#x7ED3;&#x6784;&#x4F53;&#x8F6C;&#x5316;&#x4E3A;&#x5B57;&#x7B26;&#x4E32;</li>
 </ul>
 </li>
 </ol>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;time.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">time_t</span> now;   </div><div class="line">    <span class="keyword">struct</span> tm *timenow;   </div><div class="line">    <span class="keyword">char</span> strtemp[<span class="number">255</span>];   </div><div class="line">    <span class="keyword">char</span> *str_time;</div><div class="line"></div><div class="line">	time(&amp;now);   </div><div class="line">    <span class="built_in">printf</span>(<span class="string">"time is : %ld \n"</span>, now);  </div><div class="line">    timenow = localtime(&amp;now);   </div><div class="line">    str_time = asctime(timenow);<span class="comment">//不安全版本</span></div><div class="line">    asctime_r(timenow,strtemp);<span class="comment">//安全版</span></div></pre></td></tr></table></figure>
-<h2 id="asctime-r和asctime注意事项，对比"><a href="#asctime-r和asctime注意事项，对比" class="headerlink" title="asctime_r和asctime注意事项，对比"></a>asctime_r和asctime注意事项，对比</h2><p>asctime_r和asctime_r对比，会感觉asctime有内存泄漏的可能，其实并不会内存泄漏但有一定不可控性<br>asctime返回的地址是一块静态地址，等下次调用asctime返回的还是这块地址，因此并不会内存泄漏，但是有一定不可控性，比如使用了分别获取了两次当前世界函数，然后再读取就会发现两次时间相同，eg:</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;time.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">time_t</span> now;   </div><div class="line">    <span class="keyword">struct</span> tm *timenow;   </div><div class="line">    <span class="keyword">char</span> strtemp[<span class="number">255</span>];   </div><div class="line">    <span class="keyword">char</span> *str_time;</div><div class="line">    <span class="keyword">char</span> *str_time2;</div><div class="line">    </div><div class="line">    <span class="comment">//第一次获取当前时间</span></div><div class="line">    time(&amp;now);   </div><div class="line">    <span class="built_in">printf</span>(<span class="string">"time is : %ld \n"</span>, now);  </div><div class="line">    timenow = localtime(&amp;now);   </div><div class="line">    str_time = asctime(timenow);<span class="comment">//不安全版本</span></div><div class="line">    <span class="built_in">printf</span>(<span class="string">"local time is : %s \n"</span>, str_time);  </div><div class="line">    sleep(<span class="number">1</span>);</div><div class="line">    <span class="comment">//第二次获取当前时间</span></div><div class="line">    time(&amp;now);   </div><div class="line">    timenow = localtime(&amp;now);   </div><div class="line">    str_time2 = asctime(timenow);<span class="comment">//不安全版本</span></div><div class="line">    <span class="comment">//打印str_time1 和str_time2 发现结果相同</span></div><div class="line">    <span class="built_in">printf</span>(<span class="string">"local time1 is : %s \n"</span>, str_time);  </div><div class="line">    <span class="built_in">printf</span>(<span class="string">"local time2 is : %s \n"</span>, str_time2);  </div><div class="line">    <span class="comment">//free(str_time);//如果释放会出错</span></div><div class="line">    asctime_r(timenow,strtemp);</div><div class="line">    <span class="built_in">printf</span>(<span class="string">"local time is : %s \n"</span>, strtemp);  </div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;time.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">{</div><div class="line">    <span class="keyword">time_t</span> now;   </div><div class="line">    <span class="keyword">struct</span> tm *timenow;   </div><div class="line">    <span class="keyword">char</span> strtemp[<span class="number">255</span>];   </div><div class="line">    <span class="keyword">char</span> *str_time;</div><div class="line"></div><div class="line">	time(&amp;now);   </div><div class="line">    <span class="built_in">printf</span>(<span class="string">&quot;time is : %ld \n&quot;</span>, now);  </div><div class="line">    timenow = localtime(&amp;now);   </div><div class="line">    str_time = asctime(timenow);<span class="comment">//&#x4E0D;&#x5B89;&#x5168;&#x7248;&#x672C;</span></div><div class="line">    asctime_r(timenow,strtemp);<span class="comment">//&#x5B89;&#x5168;&#x7248;</span></div></pre></td></tr></table></figure>
+<h2 id="asctime-r&#x548C;asctime&#x6CE8;&#x610F;&#x4E8B;&#x9879;&#xFF0C;&#x5BF9;&#x6BD4;"><a href="#asctime-r&#x548C;asctime&#x6CE8;&#x610F;&#x4E8B;&#x9879;&#xFF0C;&#x5BF9;&#x6BD4;" class="headerlink" title="asctime_r&#x548C;asctime&#x6CE8;&#x610F;&#x4E8B;&#x9879;&#xFF0C;&#x5BF9;&#x6BD4;"></a>asctime_r&#x548C;asctime&#x6CE8;&#x610F;&#x4E8B;&#x9879;&#xFF0C;&#x5BF9;&#x6BD4;</h2><p>asctime_r&#x548C;asctime_r&#x5BF9;&#x6BD4;&#xFF0C;&#x4F1A;&#x611F;&#x89C9;asctime&#x6709;&#x5185;&#x5B58;&#x6CC4;&#x6F0F;&#x7684;&#x53EF;&#x80FD;&#xFF0C;&#x5176;&#x5B9E;&#x5E76;&#x4E0D;&#x4F1A;&#x5185;&#x5B58;&#x6CC4;&#x6F0F;&#x4F46;&#x6709;&#x4E00;&#x5B9A;&#x4E0D;&#x53EF;&#x63A7;&#x6027;<br>asctime&#x8FD4;&#x56DE;&#x7684;&#x5730;&#x5740;&#x662F;&#x4E00;&#x5757;&#x9759;&#x6001;&#x5730;&#x5740;&#xFF0C;&#x7B49;&#x4E0B;&#x6B21;&#x8C03;&#x7528;asctime&#x8FD4;&#x56DE;&#x7684;&#x8FD8;&#x662F;&#x8FD9;&#x5757;&#x5730;&#x5740;&#xFF0C;&#x56E0;&#x6B64;&#x5E76;&#x4E0D;&#x4F1A;&#x5185;&#x5B58;&#x6CC4;&#x6F0F;&#xFF0C;&#x4F46;&#x662F;&#x6709;&#x4E00;&#x5B9A;&#x4E0D;&#x53EF;&#x63A7;&#x6027;&#xFF0C;&#x6BD4;&#x5982;&#x4F7F;&#x7528;&#x4E86;&#x5206;&#x522B;&#x83B7;&#x53D6;&#x4E86;&#x4E24;&#x6B21;&#x5F53;&#x524D;&#x4E16;&#x754C;&#x51FD;&#x6570;&#xFF0C;&#x7136;&#x540E;&#x518D;&#x8BFB;&#x53D6;&#x5C31;&#x4F1A;&#x53D1;&#x73B0;&#x4E24;&#x6B21;&#x65F6;&#x95F4;&#x76F8;&#x540C;&#xFF0C;eg:</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;time.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">{</div><div class="line">    <span class="keyword">time_t</span> now;   </div><div class="line">    <span class="keyword">struct</span> tm *timenow;   </div><div class="line">    <span class="keyword">char</span> strtemp[<span class="number">255</span>];   </div><div class="line">    <span class="keyword">char</span> *str_time;</div><div class="line">    <span class="keyword">char</span> *str_time2;</div><div class="line">    </div><div class="line">    <span class="comment">//&#x7B2C;&#x4E00;&#x6B21;&#x83B7;&#x53D6;&#x5F53;&#x524D;&#x65F6;&#x95F4;</span></div><div class="line">    time(&amp;now);   </div><div class="line">    <span class="built_in">printf</span>(<span class="string">&quot;time is : %ld \n&quot;</span>, now);  </div><div class="line">    timenow = localtime(&amp;now);   </div><div class="line">    str_time = asctime(timenow);<span class="comment">//&#x4E0D;&#x5B89;&#x5168;&#x7248;&#x672C;</span></div><div class="line">    <span class="built_in">printf</span>(<span class="string">&quot;local time is : %s \n&quot;</span>, str_time);  </div><div class="line">    sleep(<span class="number">1</span>);</div><div class="line">    <span class="comment">//&#x7B2C;&#x4E8C;&#x6B21;&#x83B7;&#x53D6;&#x5F53;&#x524D;&#x65F6;&#x95F4;</span></div><div class="line">    time(&amp;now);   </div><div class="line">    timenow = localtime(&amp;now);   </div><div class="line">    str_time2 = asctime(timenow);<span class="comment">//&#x4E0D;&#x5B89;&#x5168;&#x7248;&#x672C;</span></div><div class="line">    <span class="comment">//&#x6253;&#x5370;str_time1 &#x548C;str_time2 &#x53D1;&#x73B0;&#x7ED3;&#x679C;&#x76F8;&#x540C;</span></div><div class="line">    <span class="built_in">printf</span>(<span class="string">&quot;local time1 is : %s \n&quot;</span>, str_time);  </div><div class="line">    <span class="built_in">printf</span>(<span class="string">&quot;local time2 is : %s \n&quot;</span>, str_time2);  </div><div class="line">    <span class="comment">//free(str_time);//&#x5982;&#x679C;&#x91CA;&#x653E;&#x4F1A;&#x51FA;&#x9519;</span></div><div class="line">    asctime_r(timenow,strtemp);</div><div class="line">    <span class="built_in">printf</span>(<span class="string">&quot;local time is : %s \n&quot;</span>, strtemp);  </div><div class="line"></div><div class="line">}</div></pre></td></tr></table></figure>
       
     </div>
 
