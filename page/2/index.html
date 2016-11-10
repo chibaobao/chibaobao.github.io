@@ -310,7 +310,18 @@
           
           &#x5173;&#x4E8E;mfc&#x7684;&#x5404;&#x79CD;&#x63A7;&#x4EF6;&#x7C7B;&#x7684;&#x57FA;&#x672C;&#x8BBE;&#x7F6E;&#x4F7F;&#x7528;
 MFC-2CDialog
-DOModal() //&
+DOModal() //&#x6A21;&#x6001;&#x5BF9;&#x8BDD;&#x6846;
+
+&#x8D44;&#x6E90;&#x89C6;&#x56FE;&#x6DFB;&#x52A0;&#x5BF9;&#x8BDD;&#x6846;&#x8D44;&#x6E90;
+&#x7ED9;&#x8D44;&#x6E90;&#x5173;&#x8054;&#x7C7B;&#xFF08;&#x53F3;&#x952E;&#x6DFB;&#x52A0;&#x7C7B;&#xFF09; //enum Id=&#x8D44;&#x6E90;id
+&#x5305;&#x542B;&#x5934;&#x6587;&#x4EF6;
+&#x521B;&#x5EFA;&#x5BF9;&#x8C61;&#xFF0C;&#x5E76;.DoModal()
+
+
+ShowWindow() //&#x975E;&#x6A21;&#x6001;&#x5BF9;&#x8BDD;&#x6846;
+
+&#x521B;&#x5EFA;&#x6A21;&#x6001;&#x5BF9;&#x8BDD;&#x6846;&#x7684;1&#xFF0C;2&#xFF0C;3&#x6B65;
+&#x521B;&#x5EFA;&#x5BF9;&#x8C61;(&#x5B9A;&#x4E49;&#x4E3A;&#x7C7B;&#x7684;&#x6210;&#x5458;&#x53D8;&#x91CF;&#x5C31;&#x4E0D;&#x4F1
           ...
 
           <div class="post-more-link text-center">
@@ -436,7 +447,22 @@ DOModal() //&
         
           
           hexo&#x7684;&#x5B89;&#x88C5;&#x548C;&#x5E38;&#x7528;&#x547D;&#x4EE4;
-hexo &#x7684;&#x4F7F;&#x7528;&#x5B89;&#x88C5; &#x67E5;&#x770B;hexo&#x5B98;&#x7F51
+hexo &#x7684;&#x4F7F;&#x7528;&#x5B89;&#x88C5; &#x67E5;&#x770B;hexo&#x5B98;&#x7F51;: &#x5E2E;&#x52A9;&#x6587;&#x6863;
+&#x4F7F;&#x7528;
+&#x672C;&#x5730;&#x670D;&#x52A1;&#x5668;&#x542F;&#x52A8; hexo server hexo server -p  5000   &#x6307;&#x5B9A;&#x7AEF;&#x53E3;&#x53F7;&#x4E3A;5000
+&#x65B0;&#x5EFA;&#x6587;&#x4EF6;  hexo new file
+&#x751F;&#x6210;&#x9759;&#x6001;&#x6587;&#x4EF6;  hexo generate    
+&#x540C;&#x6B65;&#x5230;github
+hexo deploy &#x2013;generate
+
+
+
+&#x9519;&#x8BEF;&#xFF1A;not found: git
+&#x63D0;&#x4EA4;&#x5230;github&#x62A5;&#x9519;&#xFF1A;ERROR Deployer not found: git
+&#x89E3;&#x51B3;&#xFF1A;npm install hexo-deployer-git &#x2013;save&#x914D;&#x7F6E;&#x6587;&#x4EF6;
+
+
+&#x57FA;&#x672C;&#x914D;&#x7F6E;title: &#x6807;&#
           ...
 
           <div class="post-more-link text-center">
@@ -563,7 +589,15 @@ hexo &#x7684;&#x4F7F;&#x7528;&#x5B89;&#x88C5; &#x67E5;&#x770B;hexo&#x5B98;&#x7F5
           
           mardown&#x7684;&#x57FA;&#x672C;&#x8BED;&#x6CD5;
 &#x5173;&#x4E8E;markdown&#x57FA;&#x672C;&#x8BED;&#x6CD5;&#x6807;&#x9898;
-12# title  	//&#x8BBE;&#x7F6E
+12# title  	//&#x8BBE;&#x7F6E;&#x6807;&#x9898;&#x4E3A;title## title2	//&#x8BBE;&#x7F6E;&#x4E8C;&#x7EA7;&#x6807;&#x9898;&#x4E3A;title2
+&#x5217;&#x8868;
+&#x65E0;&#x5E8F;&#x5217;&#x8868;123- a 		//&#x5217;&#x8868;1- b 		//&#x5217;&#x8868;1	-ba 	//&#x5217;&#x8868;b&#x7684;&#x5B50;&#x5217;&#x8868;
+&#x6709;&#x5E8F;&#x5217;&#x8868;1234561. a2. b3. c	1.ca	2.cb3.d
+&#x5B57;&#x4F53;
+123**a** 			&#x52A0;&#x7C97;*a*				&#x659C;&#x4F53;``a``			&#x9AD8;&#x4EAE;
+&#x94FE;&#x63A5;12[&#x767E;&#x5EA6;](www.baidu.com)	&#x94FE;&#x63A5;![]()					&#x56FE;&#x7247;&#x94FE;&#x63A5;
+&#x5F15;&#x7528;
+12&gt;&#x6587;&#x672C;&#x5F15;&#x7528;\```aaa\```				&#x591A;&#x884C;&#x5F15;&#x7528; (&#x4EE3;&#x78
           ...
 
           <div class="post-more-link text-center">
@@ -689,7 +723,21 @@ hexo &#x7684;&#x4F7F;&#x7528;&#x5B89;&#x88C5; &#x67E5;&#x770B;hexo&#x5B98;&#x7F5
         
           
           github &#x4F7F;&#x7528;githhub&#x4E2D;&#x7684;&#x540D;&#x8BCD;
-Issue:(&#x4EFB;&#x52A1;&#x95EE;&#x9898;)&#x521B;&#x5EFA;pull Request &#x65F6;&#x4F1A;&#
+Issue:(&#x4EFB;&#x52A1;&#x95EE;&#x9898;)&#x521B;&#x5EFA;pull Request &#x65F6;&#x4F1A;&#x88AB;&#x521B;&#x5EFA;&#xFF0C;
+Wiki:&#x5F00;&#x53D1;&#x6587;&#x6863;&#x6216;&#x624B;&#x518C;
+Pull Request:&#x5408;&#x5E76;&#x8BF7;&#x6C42;&#x7684;&#x4ED3;&#x5E93;
+
+git&#x4ED3;&#x5E93;&#x672C;&#x5730;&#x4F7F;&#x7528;
+init  &#x521D;&#x59CB;&#x5316;&#x672C;&#x5730;&#x4ED3;&#x5E93;
+&#x7F16;&#x5199;&#x6587;&#x4EF6;
+&#x5982;&#xFF1A;vim a.c 
+
+
+&#x63D0;&#x4EA4;&#x548C;&#x6DFB;&#x52A0;
+ 3.1. &#x6DFB;&#x52A0;&#x5230;&#x7F13;&#x5B58;&#x533A; add a.c 3.2.  &#x63D0;&#x4EA4; commit
+
+commit a.c                            &#x63D0;&#x4EA4;a.c
+commit -m  &#x201C;aaa&#x201D;                  &#x63D0;&#x4EA4;&#x7F13;&#x5B58;&#x533A;&#x4E2D;&#x5168;&#x90E8;&#x518
           ...
 
           <div class="post-more-link text-center">
