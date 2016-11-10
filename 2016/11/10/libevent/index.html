@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Linuxc," />
+  <meta name="keywords" content="Hexo, NexT" />
 
 
 
@@ -84,31 +84,27 @@
 
 
 
-<meta name="description" content="&amp;#x591A;&amp;#x7EBF;&amp;#x7A0B;
-&amp;#x591A;&amp;#x7EBF;&amp;#x7A0B;&amp;#x7F16;&amp;#x8BD1;&amp;#x65F6;&amp;#x52A0; -pthread
-pthread_t  == usinend long
-ps -Lf pid  //&amp;#x67E5;&amp;#x770B;&amp;#x7EBF;&amp;#x7A0B;
-
-&amp;#x591A;&amp;#x7EBF;&amp;#x7A0B;&amp;#x521B;&amp;#">
+<meta name="description" content="libeventlibevent&amp;#x4E8B;&amp;#x4EF6;
+libevent&amp;#x7684;API&amp;#x57FA;&amp;#x672C;&amp;#x4F7F;&amp;#x7528;
+&amp;#x5B9A;&amp;#x4E49;&amp;#x76F8;&amp;#x5173;&amp;#x7ED3;&amp;#x6784;&amp;#x4F53;
+123456//&amp;#x8981;&amp;#x76D1;&amp;#x542C;&amp;#x7684;event	struct event">
 <meta property="og:type" content="article">
-<meta property="og:title" content="linux高级编程-多线程">
-<meta property="og:url" content="http://yoursite.com/2016/11/01/linux高级编程-多线程/index.html">
+<meta property="og:title" content="libevent">
+<meta property="og:url" content="http://yoursite.com/2016/11/10/libevent/index.html">
 <meta property="og:site_name" content="chibaobao 的博客">
-<meta property="og:description" content="&amp;#x591A;&amp;#x7EBF;&amp;#x7A0B;
-&amp;#x591A;&amp;#x7EBF;&amp;#x7A0B;&amp;#x7F16;&amp;#x8BD1;&amp;#x65F6;&amp;#x52A0; -pthread
-pthread_t  == usinend long
-ps -Lf pid  //&amp;#x67E5;&amp;#x770B;&amp;#x7EBF;&amp;#x7A0B;
-
-&amp;#x591A;&amp;#x7EBF;&amp;#x7A0B;&amp;#x521B;&amp;#">
-<meta property="og:updated_time" content="2016-11-01T16:01:55.154Z">
+<meta property="og:description" content="libeventlibevent&amp;#x4E8B;&amp;#x4EF6;
+libevent&amp;#x7684;API&amp;#x57FA;&amp;#x672C;&amp;#x4F7F;&amp;#x7528;
+&amp;#x5B9A;&amp;#x4E49;&amp;#x76F8;&amp;#x5173;&amp;#x7ED3;&amp;#x6784;&amp;#x4F53;
+123456//&amp;#x8981;&amp;#x76D1;&amp;#x542C;&amp;#x7684;event	struct event">
+<meta property="og:image" content="http://yoursite.com/2016/11/10/libevent/event事件.png">
+<meta property="og:updated_time" content="2016-11-10T12:20:43.205Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="linux高级编程-多线程">
-<meta name="twitter:description" content="&amp;#x591A;&amp;#x7EBF;&amp;#x7A0B;
-&amp;#x591A;&amp;#x7EBF;&amp;#x7A0B;&amp;#x7F16;&amp;#x8BD1;&amp;#x65F6;&amp;#x52A0; -pthread
-pthread_t  == usinend long
-ps -Lf pid  //&amp;#x67E5;&amp;#x770B;&amp;#x7EBF;&amp;#x7A0B;
-
-&amp;#x591A;&amp;#x7EBF;&amp;#x7A0B;&amp;#x521B;&amp;#">
+<meta name="twitter:title" content="libevent">
+<meta name="twitter:description" content="libeventlibevent&amp;#x4E8B;&amp;#x4EF6;
+libevent&amp;#x7684;API&amp;#x57FA;&amp;#x672C;&amp;#x4F7F;&amp;#x7528;
+&amp;#x5B9A;&amp;#x4E49;&amp;#x76F8;&amp;#x5173;&amp;#x7ED3;&amp;#x6784;&amp;#x4F53;
+123456//&amp;#x8981;&amp;#x76D1;&amp;#x542C;&amp;#x7684;event	struct event">
+<meta name="twitter:image" content="http://yoursite.com/2016/11/10/libevent/event事件.png">
 
 
 
@@ -129,10 +125,10 @@ ps -Lf pid  //&amp;#x67E5;&amp;#x770B;&amp;#x7EBF;&amp;#x7A0B;
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2016/11/01/linux高级编程-多线程/"/>
+  <link rel="canonical" href="http://yoursite.com/2016/11/10/libevent/"/>
 
 
-  <title> linux高级编程-多线程 | chibaobao 的博客 </title>
+  <title> libevent | chibaobao 的博客 </title>
 </head>
 
 <body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
@@ -254,7 +250,7 @@ ps -Lf pid  //&amp;#x67E5;&amp;#x770B;&amp;#x7EBF;&amp;#x7A0B;
             
             
               
-                linux高级编程-多线程
+                libevent
               
             
           </h1>
@@ -266,38 +262,19 @@ ps -Lf pid  //&amp;#x67E5;&amp;#x770B;&amp;#x7EBF;&amp;#x7A0B;
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-11-01T23:35:08+08:00" content="2016-11-01">
-              2016-11-01
+            <time itemprop="dateCreated" datetime="2016-11-10T20:10:14+08:00" content="2016-11-10">
+              2016-11-10
             </time>
           </span>
 
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/编程学习/" itemprop="url" rel="index">
-                    <span itemprop="name">编程学习</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
           
 
           
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/11/01/linux高级编程-多线程/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/11/01/linux高级编程-多线程/" itemprop="commentsCount"></span>
+                <a href="/2016/11/10/libevent/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/11/10/libevent/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -320,90 +297,24 @@ ps -Lf pid  //&amp;#x67E5;&amp;#x770B;&amp;#x7EBF;&amp;#x7A0B;
       
 
       
-        <h1 id="&#x591A;&#x7EBF;&#x7A0B;"><a href="#&#x591A;&#x7EBF;&#x7A0B;" class="headerlink" title="&#x591A;&#x7EBF;&#x7A0B;"></a>&#x591A;&#x7EBF;&#x7A0B;</h1><ul>
-<li>&#x591A;&#x7EBF;&#x7A0B;&#x7F16;&#x8BD1;&#x65F6;&#x52A0; -pthread</li>
-<li>pthread_t  == usinend long</li>
-<li>ps -Lf pid  //&#x67E5;&#x770B;&#x7EBF;&#x7A0B;</li>
-</ul>
-<h2 id="&#x591A;&#x7EBF;&#x7A0B;&#x521B;&#x5EFA;"><a href="#&#x591A;&#x7EBF;&#x7A0B;&#x521B;&#x5EFA;" class="headerlink" title="&#x591A;&#x7EBF;&#x7A0B;&#x521B;&#x5EFA;"></a>&#x591A;&#x7EBF;&#x7A0B;&#x521B;&#x5EFA;</h2><ul>
-<li><p>&#x591A;&#x7EBF;&#x7A0B;&#x521B;&#x5EFA;</p>
-<ul>
-<li>int pthread_create(*thread,NULL&#xFF08;&#x7EBF;&#x7A0B;&#x5C5E;&#x6027;&#xFF09;,&#x6267;&#x884C;&#x4E3B;&#x903B;&#x8F91;&#x56DE;&#x8C03;&#x51FD;&#x6570;&#xFF0C;&#x56DE;&#x8C03;&#x51FD;&#x6570;&#x53C2;&#x6570;arg);  </li>
-<li>&#x56DE;&#x8C03;&#x51FD;&#x6570;eg: void <em>fun(void </em>arg)    </li>
-</ul>
+        <h1 id="libevent"><a href="#libevent" class="headerlink" title="libevent"></a>libevent</h1><h2 id="libevent&#x4E8B;&#x4EF6;"><a href="#libevent&#x4E8B;&#x4EF6;" class="headerlink" title="libevent&#x4E8B;&#x4EF6;"></a>libevent&#x4E8B;&#x4EF6;</h2><p><img src="/2016/11/10/libevent/event&#x4E8B;&#x4EF6;.png" alt="event&#x4E8B;&#x4EF6;.png"></p>
+<h2 id="libevent&#x7684;API&#x57FA;&#x672C;&#x4F7F;&#x7528;"><a href="#libevent&#x7684;API&#x57FA;&#x672C;&#x4F7F;&#x7528;" class="headerlink" title="libevent&#x7684;API&#x57FA;&#x672C;&#x4F7F;&#x7528;"></a>libevent&#x7684;API&#x57FA;&#x672C;&#x4F7F;&#x7528;</h2><ol>
+<li><p>&#x5B9A;&#x4E49;&#x76F8;&#x5173;&#x7ED3;&#x6784;&#x4F53;</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">//&#x8981;&#x76D1;&#x542C;&#x7684;event	</div><div class="line">struct event *ev1,*ev2;</div><div class="line">//&#x8F6E;&#x8BE2;&#x65F6;&#x95F4;&#x4E3A;5s&#x4E00;&#x6B21;,&#x5728;event_new&#x8BBE;&#x7F6E;EV_PERSIST&#x540E;event_add&#x65F6;&#x4F7F;&#x7528;</div><div class="line">struct timeval five_seconds = {5,0};</div><div class="line">//base</div><div class="line">struct event_base *base ;</div></pre></td></tr></table></figure>
 </li>
-<li><p>&#x7EBF;&#x7A0B;&#x56DE;&#x6536;&#xFF08;detach&#x548C;join&#x53EA;&#x80FD;&#x9009;&#x4E00;&#x4E2A;&#x5426;&#x5219;&#x4F1A;&#x51FA;&#x9519;&#xFF09;</p>
-<ul>
-<li>pthread_detach(threadid)<ul>
-<li>&#x8BBE;&#x7F6E;&#x7EBF;&#x7A0B;&#x4E3A;&#x6E38;&#x79BB;&#x6001;</li>
-<li>threadid&#x8981;&#x8BBE;&#x7F6E;&#x7684;&#x7EBF;&#x7A0B;id</li>
-</ul>
+<li><p>&#x521D;&#x59CB;&#x5316;base(event_base_new)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">*base = event_base_new();</div></pre></td></tr></table></figure>
 </li>
-<li><p>pthread_join(thread,void **retval);</p>
-<ul>
-<li>thread&#x7EBF;&#x7A0B;&#x53F7;</li>
-<li>retval&#x7528;&#x6765;&#x5B58;&#x50A8;&#x7EBF;&#x7A0B;&#x8FD4;&#x56DE;&#x4FE1;&#x606F;</li>
-</ul>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&#x5176;&#x4ED6;&#x51FD;&#x6570;</div><div class="line"><span class="keyword">pthread_t</span> pthread_self(<span class="keyword">void</span>);<span class="comment">//pthread_self&#x662F;&#x4E00;&#x79CD;&#x51FD;&#x6570;&#xFF0C;&#x529F;&#x80FD;&#x662F;&#x83B7;&#x5F97;&#x7EBF;&#x7A0B;&#x81EA;&#x8EAB;&#x7684;ID&#x3002;</span></div><div class="line"><span class="function"><span class="keyword">char</span>* <span class="title">streeror</span><span class="params">(errno)</span></span>;&#x67E5;&#x770B;&#x9519;&#x8BEF;&#x53F7;&#x4FE1;&#x606F;</div><div class="line">pthread_cancel(thread);<span class="comment">//kill &#x5B50;&#x7EBF;&#x7A0B;&#xFF0C;&#x5B50;&#x7EBF;&#x7A0B;&#x4E2D;&#x8981;&#x6709;&#x5230;&#x8FBE;&#x53D6;&#x6D88;&#x70B9;</span></div><div class="line">	pthread_testcncel();&#x68C0;&#x67E5;&#x662F;&#x5426;&#x5230;&#x7684;&#x68C0;&#x67E5;&#x70B9;</div><div class="line">pthread_exit();&#x7EBF;&#x7A0B;&#x9000;&#x51FA;</div><div class="line">pthread_equal(t1,t2);<span class="comment">//&#x5224;&#x65AD;t1,t2&#x662F;&#x4E0D;&#x662F;&#x540C;&#x4E00;&#x4E2A;&#x7EBF;&#x7A0B;</span></div></pre></td></tr></table></figure>
+<li><p>&#x521D;&#x59CB;&#x5316;event(event_new)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">//&#x521B;&#x5EFA;ev1,&#x8BBE;&#x7F6E;</div><div class="line">//&#x53C2;&#x6570;1&#xFF1A;&#x8BBE;&#x7F6E;&#x5C06;&#x52A0;&#x5165;&#x5230;base&#x4E2D;&#xFF08;&#x53EA;&#x662F;&#x52A0;&#x5165;&#x5E76;&#x672A;&#x6FC0;&#x6D3B;&#xFF09;</div><div class="line">//&#x53C2;&#x6570;2&#xFF1A;EV_TIMEOUT&#x8BBE;&#x7F6E;&#x8D85;&#x65F6;&#xFF0C;EV_READ&#x76D1;&#x542C;&#x8BFB;&#x4E8B;&#x4EF6;&#xFF0C;EV_PERSIST&#x8BBE;&#x7F6E;&#x95EE;&#x8F6E;&#x8BE2;</div><div class="line">//&#x53C2;&#x6570;3&#xFF1A;fun:&#x56DE;&#x8C03;&#x51FD;typedef void (*event_callback_fn)(evutil_socket_t, short, void *)</div><div class="line">//&#x53C2;&#x6570;4:&#x56DE;&#x8C03;&#x51FD;&#x6570;&#x7684;&#x53C2;&#x6570;arg</div><div class="line">//&#x56DE;&#x8C03;&#x51FD;&#x6570;&#xFF1A;&#x53C2;&#x6570;&#x4E00;&#x5C31;&#x662F;&#x6587;&#x4EF6;&#x63CF;&#x8FF0;&#x7B26;fd,&#x53C2;&#x6570;&#x4E8C;&#x662F;&#x89E6;&#x53D1;&#x6DFB;&#x52A0;&#xFF1A;egEV_READ&#x6216;EV_TIMEOUT&#xFF0C;&#x53C2;&#x6570;&#x4E09;&#xFF1A;&#x53C2;&#x6570;arg</div><div class="line">ev1 = event_new(base,fd1,EV_TIMEOUT|EV_READ|EV_PERSIST,fun,(char*)&quot;reading&quot;);</div><div class="line">//EV_PERSIST&#x76D1;&#x542C;&#x5199;&#x4E8B;&#x4EF6;</div><div class="line">ev2 = event_new(base,fd2,EV_WRITE,fun,(char*)&quot;write&quot;);</div></pre></td></tr></table></figure>
 </li>
-</ul>
+<li><p>&#x5C06;event&#x52A0;&#x5165;&#x5230;base&#x4E2D;(event_add)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">//&#x521D;&#x59CB;&#x5316;---&gt;&#x672A;&#x51B3;(event&#x6DFB;&#x52A0;&#x5230;base)</div><div class="line">event_add(ev1,&amp;five_seconds);</div><div class="line">event_add(ev2,NULL);</div></pre></td></tr></table></figure>
 </li>
-</ul>
-<h2 id="&#x591A;&#x7EBF;&#x7A0B;&#x9501;"><a href="#&#x591A;&#x7EBF;&#x7A0B;&#x9501;" class="headerlink" title="&#x591A;&#x7EBF;&#x7A0B;&#x9501;"></a>&#x591A;&#x7EBF;&#x7A0B;&#x9501;</h2><ul>
-<li><p>&#x4E92;&#x65A5;&#x91CF;&#xFF1A;</p>
-<ul>
-<li>&#x7C7B;&#x578B;&#xFF1A;pthread_mutex_t</li>
-<li>pthread_mutex_init</li>
-<li>pthread_mutex_init(&amp;mutex,NULL);</li>
-<li>pthread_mutex_lock(mutex);</li>
-<li>pthread_mutex_unlock(mutex);</li>
-<li>pthread_mutex_trylock(mutex);</li>
-</ul>
+<li><p>base&#x5FAA;&#x73AF;&#x76D1;&#x542C;(event_base_dispatch)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">event_base_dispatch(base);</div></pre></td></tr></table></figure>
 </li>
-<li><p>&#x8BFB;&#x5199;&#x9501;(&#x5199;&#x72EC;&#x5360;&#xFF0C;&#x8BFB;&#x5171;&#x4EAB;&#xFF0C;&#x5199;&#x4F18;&#x5148;&#x7EA7;&#x9AD8;)&#xFF1A;</p>
-<ul>
-<li>&#x8BFB;&#x9501;&#xFF1A;&#x8BFB;&#x65F6;&#x5171;&#x4EAB;&#xFF0C;&#x5199;&#x65F6;&#x963B;&#x585E;</li>
-<li>&#x5199;&#x9501;&#xFF1A;&#x8BFB;&#x6216;&#x5199;&#x90FD;&#x963B;&#x585E;</li>
-<li>&#x591A;&#x9501;&#xFF1A;&#x4E4B;&#x540E;&#x5199;&#x9501;&#xFF0C;&#x8BFB;&#x9501;&#xFF0C;&#x8BFB;&#x4E5F;&#x963B;&#x585E;    </li>
-<li>&#x7C7B;&#x578B;&#xFF1A;pthread_rwlock_t</li>
-<li>pthread_rwlock_init()</li>
-<li>pthread_rwlock_destroy()</li>
-<li>pthread_rwlock_lock()</li>
-<li>pthread_rwlock_unlock()</li>
-<li>pthread_rwlock_trylock()</li>
-</ul>
-</li>
-<li><p>&#x6761;&#x4EF6;&#x53D8;&#x91CF;&#xFF1A;</p>
-<ul>
-<li>&#x7C7B;&#x578B;:pthread_cond_t</li>
-<li>pthread_cond_init()</li>
-<li>pthread_cond_destroy()</li>
-<li>pthread_cond_wait(cond,mutex)//&#x6761;&#x4EF6;&#x4E0D;&#x6EE1;&#x8DB3;&#x89E3;&#x9501;&#xFF0C;&#x6761;&#x4EF6;&#x6EE1;&#x8DB3;&#xFF0C;(&#x5982;&#x679C;&#x89E3;&#x9501;&#x4E86;)&#x5C1D;&#x8BD5;&#x518D;&#x6B21;&#x52A0;&#x9501;</li>
-<li>pthread_cond_timewait(cond,mutex)</li>
-<li>pthread_cond_signal()//&#x6761;&#x4EF6;&#x6EE1;&#x8DB3;&#xFF0C;&#x5524;&#x9192;&#x81F3;&#x5C11;&#x4E00;&#x4E2A;wait</li>
-<li>pthread_cond_broadcast()//&#x6761;&#x4EF6;&#x6EE1;&#x8DB3;&#xFF0C;&#x5524;&#x9192;&#x5168;&#x90E8;wait</li>
-</ul>
-</li>
-<li><p>&#x4FE1;&#x53F7;&#x91CF;</p>
-<ul>
-<li>sem_init(&amp;sem,&#x7EBF;&#x7A0B; 0 or&#x8FDB;&#x7A0B; 1,&#x4FE1;&#x53F7;&#x91CF;&#x521D;&#x59CB;&#x503C;,)</li>
-<li>set_destroy(&amp;sem)</li>
-<li>sem_wait()      ==lock</li>
-<li>sem_post()        ==unlock</li>
-</ul>
-</li>
-<li><p>&#x6587;&#x4EF6;&#x9501;&#x5E94;&#x7528;&#x4E8E;&#x8FDB;&#x7A0B;&#x95F4;</p>
-<ul>
-<li>fcntl:<ul>
-<li>F_SETLKW    lock/wait</li>
-<li>F_SETLK        trylock</li>
-<li>F_GETLK        </li>
-<li>struct flock:<br>  l_type F_RDLCK,F_WRLCK.F_UNLCK<br>l_whence SEEK<em>SET SEEK</em>&#x2026;..</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
+</ol>
 
       
     </div>
@@ -424,28 +335,18 @@ ps -Lf pid  //&amp;#x67E5;&amp;#x770B;&amp;#x7EBF;&amp;#x7A0B;
 
     <footer class="post-footer">
       
-        <div class="post-tags">
-          
-            <a href="/tags/Linuxc/" rel="tag">#Linuxc</a>
-          
-        </div>
-      
 
       
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/11/01/STL模板/" rel="next" title="STL模板">
-                <i class="fa fa-chevron-left"></i> STL模板
+              <a href="/2016/11/09/centos7下mysql的安装和使用/" rel="next" title="centos7下mysql的安装和使用">
+                <i class="fa fa-chevron-left"></i> centos7下mysql的安装和使用
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/11/06/Linux获取系统时间c函数注意事项/" rel="prev" title="Linux获取系统时间c函数注意事项">
-                Linux获取系统时间c函数注意事项 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -584,7 +485,7 @@ ps -Lf pid  //&amp;#x67E5;&amp;#x770B;&amp;#x7EBF;&amp;#x7A0B;
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#多线程"><span class="nav-number">1.</span> <span class="nav-text">多线程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#多线程创建"><span class="nav-number">1.1.</span> <span class="nav-text">多线程创建</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#多线程锁"><span class="nav-number">1.2.</span> <span class="nav-text">多线程锁</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#libevent"><span class="nav-number">1.</span> <span class="nav-text">libevent</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#libevent事件"><span class="nav-number">1.1.</span> <span class="nav-text">libevent事件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#libevent的API基本使用"><span class="nav-number">1.2.</span> <span class="nav-text">libevent的API基本使用</span></a></li></ol></li></ol></div>
             
           </div>
         </section>
