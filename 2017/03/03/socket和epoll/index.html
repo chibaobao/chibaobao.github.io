@@ -1,0 +1,661 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Linuxc," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/mytux.png?v=5.0.2" />
+
+
+
+
+
+
+<meta name="description" content="socket&amp;#x4EE5;&amp;#x53CA;epollsocket&amp;#x524D;&amp;#x671F;&amp;#xFF1A;struct sockaddr_in serveraddr,cliaddr;
+server&amp;#x7AEF;&amp;#xFF1A;1234567891. listenfd = socket(AF_INET,SOCK_STREAM,0);//AF_INET:ipv4&amp;#xFF0C;SOCK_ST">
+<meta property="og:type" content="article">
+<meta property="og:title" content="socket和epoll">
+<meta property="og:url" content="http://yoursite.com/2017/03/03/socket和epoll/index.html">
+<meta property="og:site_name" content="chibaobao 的博客">
+<meta property="og:description" content="socket&amp;#x4EE5;&amp;#x53CA;epollsocket&amp;#x524D;&amp;#x671F;&amp;#xFF1A;struct sockaddr_in serveraddr,cliaddr;
+server&amp;#x7AEF;&amp;#xFF1A;1234567891. listenfd = socket(AF_INET,SOCK_STREAM,0);//AF_INET:ipv4&amp;#xFF0C;SOCK_ST">
+<meta property="og:updated_time" content="2017-03-03T07:52:58.704Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="socket和epoll">
+<meta name="twitter:description" content="socket&amp;#x4EE5;&amp;#x53CA;epollsocket&amp;#x524D;&amp;#x671F;&amp;#xFF1A;struct sockaddr_in serveraddr,cliaddr;
+server&amp;#x7AEF;&amp;#xFF1A;1234567891. listenfd = socket(AF_INET,SOCK_STREAM,0);//AF_INET:ipv4&amp;#xFF0C;SOCK_ST">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/03/03/socket和epoll/"/>
+
+
+  <title> socket和epoll | chibaobao 的博客 </title>
+</head>
+
+<body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">chibaobao 的博客</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">黄海驰的个人博客</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                socket和epoll
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-03-03T15:51:27+08:00" content="2017-03-03">
+              2017-03-03
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/编程学习/" itemprop="url" rel="index">
+                    <span itemprop="name">编程学习</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/03/03/socket和epoll/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/03/socket和epoll/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="socket&#x4EE5;&#x53CA;epoll"><a href="#socket&#x4EE5;&#x53CA;epoll" class="headerlink" title="socket&#x4EE5;&#x53CA;epoll"></a>socket&#x4EE5;&#x53CA;epoll</h1><h2 id="socket"><a href="#socket" class="headerlink" title="socket"></a>socket</h2><p>&#x524D;&#x671F;&#xFF1A;struct sockaddr_in serveraddr,cliaddr;</p>
+<p>server&#x7AEF;&#xFF1A;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">1. listenfd = socket(AF_INET,SOCK_STREAM,0);//AF_INET:ipv4&#xFF0C;SOCK_STREAM&#xFF1A;&#x6D41;&#x5F0F;&#x534F;&#x8BAE;</div><div class="line">2.  bind(listenfd,(struct sockaddr *)&amp;serveraddr,sizeof(serveraddr));</div><div class="line">	- bzero(&amp;serveraddr,sizeof(serveraddr));</div><div class="line">	- serveraddr.sin_family = AF_INET;</div><div class="line">    - serveraddr.sin_addr.s_addr = htonl(INADDR_ANY);</div><div class="line">    - serveraddr.sin_port = htons(8880);</div><div class="line">3.  listen(listenfd,20);</div><div class="line">4.  connfd = accept(listenfd,(struct sockaddr*)&amp;cliaddr,&amp;cliaddr_len);//cliaddr_len = sizeof(cliaddr)</div><div class="line">	- printf(&quot;new conn:ip %s,port:%d\n&quot;,inet_ntoa(cliaddr.sin_addr),ntohs(cliaddr.sin_port));</div></pre></td></tr></table></figure></p>
+<p>client&#x7AEF;&#xFF1A;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">1. sockfd = socket(AF_INET,SOCK_STREAM,0);</div><div class="line">2. connect(sockfd,(struct sockaddr*)&amp;serveraddr,sizeof(serveraddr));</div></pre></td></tr></table></figure></p>
+<h2 id="epoll&#x5E38;&#x7528;&#x51FD;&#x6570;"><a href="#epoll&#x5E38;&#x7528;&#x51FD;&#x6570;" class="headerlink" title="epoll&#x5E38;&#x7528;&#x51FD;&#x6570;"></a>epoll&#x5E38;&#x7528;&#x51FD;&#x6570;</h2><p>&#x6CE8;&#x610F;&#xFF1A;</p>
+<ol>
+<li>&#x6BCF;&#x6B21;&#x4ECE;fd&#x4E2D;&#x8BFB;&#x53D6;&#x6570;&#x636E;&#x65F6;&#x5C06;buf&#x6E05;&#x96F6;</li>
+<li>EPOLLIN&#x4E8B;&#x4EF6;&#xFF0C;&#x5F53;&#x5BA2;&#x6237;&#x7AEF;&#x5173;&#x95ED;&#x65F6;&#x4ECE;fd&#x4E2D;&#x8BFB;&#x53D6;&#x7684;&#x6570;&#x636E;&#x957F;&#x5EA6;&#x4E3A;0&#x6B64;&#x65F6;&#x8BB0;&#x5F97;&#x5173;&#x95ED;fd<ul>
+<li>serveraddr.sin_family = AF_INET;</li>
+<li>inet_pton(AF_INET,&#x201D;127.0.0.1&#x201D;,&amp;serveraddr.sin_addr);</li>
+<li>serveraddr.sin_port = htons(8880);</li>
+</ul>
+</li>
+</ol>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * @file server.c</div><div class="line"> * @brief  epoll&#x51FD;&#x6570;&#x7684;&#x670D;&#x52A1;&#x5668;&#x7AEF;</div><div class="line"> * @author chibaobao</div><div class="line"> * @version </div><div class="line"> * @date 2017-01-18</div><div class="line"> */</div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/types.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/socket.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;arpa/inet.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/epoll.h&gt;</span></span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">{</div><div class="line">    <span class="keyword">struct</span> sockaddr_in serveraddr,cliaddr;</div><div class="line">    <span class="keyword">int</span> cliaddr_len = <span class="keyword">sizeof</span>(cliaddr);</div><div class="line">    <span class="keyword">int</span> listenfd,connfd;</div><div class="line">    <span class="keyword">char</span> buf[<span class="number">1024</span>];</div><div class="line">    <span class="keyword">char</span> str[INET_ADDRSTRLEN];</div><div class="line">    <span class="keyword">int</span> i=<span class="number">0</span>;</div><div class="line">    <span class="keyword">int</span> efd;</div><div class="line">    listenfd = socket(AF_INET,SOCK_STREAM,<span class="number">0</span>);</div><div class="line">    bzero(&amp;serveraddr,<span class="keyword">sizeof</span>(serveraddr));</div><div class="line">    serveraddr.sin_family = AF_INET;</div><div class="line">    serveraddr.sin_addr.s_addr = htonl(INADDR_ANY);</div><div class="line">    serveraddr.sin_port = htons(<span class="number">8880</span>);</div><div class="line"></div><div class="line">    bind(listenfd,(<span class="keyword">struct</span> sockaddr *)&amp;serveraddr,<span class="keyword">sizeof</span>(serveraddr));</div><div class="line">    listen(listenfd,<span class="number">20</span>);</div><div class="line">    </div><div class="line">    <span class="keyword">struct</span> epoll_event event;</div><div class="line">    <span class="keyword">struct</span> epoll_event list_event[<span class="number">1024</span>];</div><div class="line">    <span class="keyword">int</span> res,len;</div><div class="line">    efd = epoll_create(<span class="number">10</span>);</div><div class="line">    </div><div class="line">    event.events = EPOLLIN;</div><div class="line"></div><div class="line">    event.data.fd=listenfd;</div><div class="line">    epoll_ctl(efd,EPOLL_CTL_ADD,listenfd,&amp;event);</div><div class="line"></div><div class="line"></div><div class="line">    </div><div class="line">    <span class="keyword">while</span>(<span class="number">1</span>)</div><div class="line">    {</div><div class="line">        res = epoll_wait(efd,list_event,<span class="number">1024</span>,<span class="number">-1</span>);</div><div class="line">        <span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;res;i++)</div><div class="line">        {</div><div class="line">            <span class="keyword">if</span>(list_event[i].data.fd == listenfd)</div><div class="line">            {</div><div class="line">                connfd = accept(listenfd,(<span class="keyword">struct</span> sockaddr*)&amp;cliaddr,&amp;cliaddr_len);</div><div class="line">                <span class="built_in">printf</span>(<span class="string">&quot;new conn:ip %s,port:%d\n&quot;</span>,inet_ntoa(cliaddr.sin_addr),ntohs(cliaddr.sin_port));</div><div class="line">                event.data.fd=connfd;</div><div class="line">                epoll_ctl(efd,EPOLL_CTL_ADD,connfd,&amp;event);</div><div class="line">            }</div><div class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(list_event[i].events &amp; EPOLLIN)</div><div class="line">            {</div><div class="line">                bzero(buf,<span class="keyword">sizeof</span>(buf));</div><div class="line">                len = read(list_event[i].data.fd,buf,<span class="keyword">sizeof</span>(buf));</div><div class="line">                <span class="keyword">if</span>(len == <span class="number">0</span>)</div><div class="line">                {</div><div class="line">                    epoll_ctl(efd, EPOLL_CTL_DEL, list_event[i].data.fd, <span class="literal">NULL</span>);</div><div class="line">                    close(list_event[i].data.fd);</div><div class="line">                }</div><div class="line">                <span class="built_in">printf</span>(<span class="string">&quot;str[%d]:#%s#\n&quot;</span>,i,buf);</div><div class="line">            }</div><div class="line">        }</div><div class="line">    }</div><div class="line">}</div></pre></td></tr></table></figure>
+<p>client</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/types.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/socket.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;arpa/inet.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/epoll.h&gt;</span></span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">{</div><div class="line">    <span class="keyword">struct</span> sockaddr_in serveraddr;</div><div class="line">    <span class="keyword">char</span> buf[<span class="number">1024</span>];</div><div class="line">    <span class="keyword">int</span> sockfd,i;</div><div class="line">    bzero(buf,<span class="keyword">sizeof</span>(buf));</div><div class="line">    bzero(&amp;serveraddr,<span class="keyword">sizeof</span>(serveraddr));</div><div class="line"></div><div class="line">    sockfd = socket(AF_INET,SOCK_STREAM,<span class="number">0</span>);</div><div class="line">    serveraddr.sin_family = AF_INET;</div><div class="line">    inet_pton(AF_INET,<span class="string">&quot;127.0.0.1&quot;</span>,&amp;serveraddr.sin_addr);</div><div class="line">    serveraddr.sin_port = htons(<span class="number">8880</span>);</div><div class="line"></div><div class="line">    connect(sockfd,(<span class="keyword">struct</span> sockaddr*)&amp;serveraddr,<span class="keyword">sizeof</span>(serveraddr));</div><div class="line">    <span class="keyword">while</span>(<span class="number">1</span>)</div><div class="line">    {</div><div class="line">        bzero(buf,<span class="keyword">sizeof</span>(buf));</div><div class="line">        <span class="built_in">strcpy</span>(buf,<span class="string">&quot;aaabbbccc\n&quot;</span>);</div><div class="line">        write(sockfd,buf,<span class="built_in">strlen</span>(buf));</div><div class="line">        sleep(<span class="number">3</span>);</div><div class="line">    }</div><div class="line">    close(sockfd);</div><div class="line">}</div></pre></td></tr></table></figure>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Linuxc/" rel="tag">#Linuxc</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/03/03/web-py总结/" rel="next" title="web.py总结">
+                <i class="fa fa-chevron-left"></i> web.py总结
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/03/03/python爬虫基础/" rel="prev" title="python爬虫基础">
+                python爬虫基础 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+            <section id="comments">
+    <!-- 多说评论框 start -->
+    <div class="ds-thread" data-thread-key="<%= post.layout %>-<%= post.slug %>" data-title="<%= post.title %>" data-url="<%= page.permalink %>"></div>
+    <!-- 多说评论框 end -->
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+    var duoshuoQuery = {short_name:'<%= config.duoshuo_shortname %>'};
+      (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0] 
+         || document.getElementsByTagName('body')[0]).appendChild(ds);
+      })();
+      </script>
+    <!-- 多说公共JS代码 end -->
+  </section>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/mytux.png"
+               alt="chibaobao" />
+          <p class="site-author-name" itemprop="name">chibaobao</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">21</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/chibaobao" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#socket以及epoll"><span class="nav-number">1.</span> <span class="nav-text">socket以及epoll</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#socket"><span class="nav-number">1.1.</span> <span class="nav-text">socket</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#epoll常用函数"><span class="nav-number">1.2.</span> <span class="nav-text">epoll常用函数</span></a></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">chibaobao</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"chibaobao"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>
