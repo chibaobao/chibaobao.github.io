@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Linuxc," />
+  <meta name="keywords" content="linuxc,基础知识," />
 
 
 
@@ -84,16 +84,24 @@
 
 
 
-<meta name="description" content="Linux&amp;#x83B7;&amp;#x53D6;&amp;#x7CFB;&amp;#x7EDF;&amp;#x65F6;&amp;#x95F4;c&amp;#x51FD;&amp;#x6570;&amp;#x6CE8;&amp;#x610F;&amp;#x4E8B;&amp;#x9879;&amp;#x83B7;&amp;#x53D6;&amp;#x5F53;&amp;#x524D;&amp;#x65F6;&amp;#x95F4;&amp;#x83B7;&amp;#x5F97;&amp;#x5F53;&amp;#x524D;&amp;#x7CFB;&amp;#x7EDF;&amp;#">
+<meta name="description" content="c&amp;#x7A0B;&amp;#x5E8F;&amp;#x5185;&amp;#x5B58;&amp;#x56DB;&amp;#x533A;&amp;#x5185;&amp;#x5B58;&amp;#x5206;&amp;#x5E03;&amp;#xFF08;&amp;#x5F15;&amp;#x81EA;APUE.7-5&amp;#xFF09;
+
+&amp;#x6B63;&amp;#x6587;&amp;#x6BB5;&amp;#xFF08;&amp;#x4EE3;&amp;#x7801;&amp;#x6BB5;&amp;#xFF09;&amp;#x3002;&amp;#x8F">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Linux获取系统时间c函数注意事项">
-<meta property="og:url" content="http://yoursite.com/2016/11/06/Linux获取系统时间c函数注意事项/index.html">
+<meta property="og:title" content="c程序内存四区">
+<meta property="og:url" content="http://yoursite.com/2017/03/08/c程序内存四区/index.html">
 <meta property="og:site_name" content="chibaobao 的博客">
-<meta property="og:description" content="Linux&amp;#x83B7;&amp;#x53D6;&amp;#x7CFB;&amp;#x7EDF;&amp;#x65F6;&amp;#x95F4;c&amp;#x51FD;&amp;#x6570;&amp;#x6CE8;&amp;#x610F;&amp;#x4E8B;&amp;#x9879;&amp;#x83B7;&amp;#x53D6;&amp;#x5F53;&amp;#x524D;&amp;#x65F6;&amp;#x95F4;&amp;#x83B7;&amp;#x5F97;&amp;#x5F53;&amp;#x524D;&amp;#x7CFB;&amp;#x7EDF;&amp;#">
-<meta property="og:updated_time" content="2016-11-06T13:04:23.479Z">
+<meta property="og:description" content="c&amp;#x7A0B;&amp;#x5E8F;&amp;#x5185;&amp;#x5B58;&amp;#x56DB;&amp;#x533A;&amp;#x5185;&amp;#x5B58;&amp;#x5206;&amp;#x5E03;&amp;#xFF08;&amp;#x5F15;&amp;#x81EA;APUE.7-5&amp;#xFF09;
+
+&amp;#x6B63;&amp;#x6587;&amp;#x6BB5;&amp;#xFF08;&amp;#x4EE3;&amp;#x7801;&amp;#x6BB5;&amp;#xFF09;&amp;#x3002;&amp;#x8F">
+<meta property="og:image" content="http://yoursite.com/2017/03/08/c程序内存四区/c语言内存分布图.PNG">
+<meta property="og:updated_time" content="2017-03-08T06:38:27.329Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Linux获取系统时间c函数注意事项">
-<meta name="twitter:description" content="Linux&amp;#x83B7;&amp;#x53D6;&amp;#x7CFB;&amp;#x7EDF;&amp;#x65F6;&amp;#x95F4;c&amp;#x51FD;&amp;#x6570;&amp;#x6CE8;&amp;#x610F;&amp;#x4E8B;&amp;#x9879;&amp;#x83B7;&amp;#x53D6;&amp;#x5F53;&amp;#x524D;&amp;#x65F6;&amp;#x95F4;&amp;#x83B7;&amp;#x5F97;&amp;#x5F53;&amp;#x524D;&amp;#x7CFB;&amp;#x7EDF;&amp;#">
+<meta name="twitter:title" content="c程序内存四区">
+<meta name="twitter:description" content="c&amp;#x7A0B;&amp;#x5E8F;&amp;#x5185;&amp;#x5B58;&amp;#x56DB;&amp;#x533A;&amp;#x5185;&amp;#x5B58;&amp;#x5206;&amp;#x5E03;&amp;#xFF08;&amp;#x5F15;&amp;#x81EA;APUE.7-5&amp;#xFF09;
+
+&amp;#x6B63;&amp;#x6587;&amp;#x6BB5;&amp;#xFF08;&amp;#x4EE3;&amp;#x7801;&amp;#x6BB5;&amp;#xFF09;&amp;#x3002;&amp;#x8F">
+<meta name="twitter:image" content="http://yoursite.com/2017/03/08/c程序内存四区/c语言内存分布图.PNG">
 
 
 
@@ -114,10 +122,10 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2016/11/06/Linux获取系统时间c函数注意事项/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/03/08/c程序内存四区/"/>
 
 
-  <title> Linux获取系统时间c函数注意事项 | chibaobao 的博客 </title>
+  <title> c程序内存四区 | chibaobao 的博客 </title>
 </head>
 
 <body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
@@ -239,7 +247,7 @@
             
             
               
-                Linux获取系统时间c函数注意事项
+                c程序内存四区
               
             
           </h1>
@@ -251,8 +259,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-11-06T20:45:46+08:00" content="2016-11-06">
-              2016-11-06
+            <time itemprop="dateCreated" datetime="2017-03-08T14:30:01+08:00" content="2017-03-08">
+              2017-03-08
             </time>
           </span>
 
@@ -281,8 +289,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/11/06/Linux获取系统时间c函数注意事项/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/11/06/Linux获取系统时间c函数注意事项/" itemprop="commentsCount"></span>
+                <a href="/2017/03/08/c程序内存四区/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/08/c程序内存四区/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -305,24 +313,21 @@
       
 
       
-        <h1 id="Linux&#x83B7;&#x53D6;&#x7CFB;&#x7EDF;&#x65F6;&#x95F4;c&#x51FD;&#x6570;&#x6CE8;&#x610F;&#x4E8B;&#x9879;"><a href="#Linux&#x83B7;&#x53D6;&#x7CFB;&#x7EDF;&#x65F6;&#x95F4;c&#x51FD;&#x6570;&#x6CE8;&#x610F;&#x4E8B;&#x9879;" class="headerlink" title="Linux&#x83B7;&#x53D6;&#x7CFB;&#x7EDF;&#x65F6;&#x95F4;c&#x51FD;&#x6570;&#x6CE8;&#x610F;&#x4E8B;&#x9879;"></a>Linux&#x83B7;&#x53D6;&#x7CFB;&#x7EDF;&#x65F6;&#x95F4;c&#x51FD;&#x6570;&#x6CE8;&#x610F;&#x4E8B;&#x9879;</h1><h2 id="&#x83B7;&#x53D6;&#x5F53;&#x524D;&#x65F6;&#x95F4;"><a href="#&#x83B7;&#x53D6;&#x5F53;&#x524D;&#x65F6;&#x95F4;" class="headerlink" title="&#x83B7;&#x53D6;&#x5F53;&#x524D;&#x65F6;&#x95F4;"></a>&#x83B7;&#x53D6;&#x5F53;&#x524D;&#x65F6;&#x95F4;</h2><p>&#x83B7;&#x5F97;&#x5F53;&#x524D;&#x7CFB;&#x7EDF;&#x65F6;&#x95F4;</p>
-<ol>
-<li>time(&amp;now);<ul>
-<li>&#x83B7;&#x53D6;&#x5F53;&#x524D;&#x65F6;&#x95F4;&#xFF08;&#x662F;&#x4E00;&#x4E2A;&#x957F;&#x6574;&#x5F62;&#x65F6;&#x95F4;&#x6233;&#xFF09;</li>
+        <h1 id="c&#x7A0B;&#x5E8F;&#x5185;&#x5B58;&#x56DB;&#x533A;"><a href="#c&#x7A0B;&#x5E8F;&#x5185;&#x5B58;&#x56DB;&#x533A;" class="headerlink" title="c&#x7A0B;&#x5E8F;&#x5185;&#x5B58;&#x56DB;&#x533A;"></a>c&#x7A0B;&#x5E8F;&#x5185;&#x5B58;&#x56DB;&#x533A;</h1><h2 id="&#x5185;&#x5B58;&#x5206;&#x5E03;&#xFF08;&#x5F15;&#x81EA;APUE-7-5&#xFF09;"><a href="#&#x5185;&#x5B58;&#x5206;&#x5E03;&#xFF08;&#x5F15;&#x81EA;APUE-7-5&#xFF09;" class="headerlink" title="&#x5185;&#x5B58;&#x5206;&#x5E03;&#xFF08;&#x5F15;&#x81EA;APUE.7-5&#xFF09;"></a>&#x5185;&#x5B58;&#x5206;&#x5E03;&#xFF08;&#x5F15;&#x81EA;APUE.7-5&#xFF09;</h2><p><img src="/2017/03/08/c&#x7A0B;&#x5E8F;&#x5185;&#x5B58;&#x56DB;&#x533A;/c&#x8BED;&#x8A00;&#x5185;&#x5B58;&#x5206;&#x5E03;&#x56FE;.PNG" alt="c&#x8BED;&#x8A00;&#x5185;&#x5B58;&#x5206;&#x5E03;&#x56FE;.PNG"></p>
+<ul>
+<li><code>&#x6B63;&#x6587;&#x6BB5;</code>&#xFF08;&#x4EE3;&#x7801;&#x6BB5;&#xFF09;&#x3002;&#x8FD9;&#x662F;&#x7531;C P U&#x6267;&#x884C;&#x7684;&#x673A;&#x5668;&#x6307;&#x4EE4;&#x90E8;&#x5206;&#x3002;&#x901A;&#x5E38;&#xFF0C;&#x6B63;&#x6587;&#x6BB5;&#x662F;&#x53EF;&#x5171;&#x4EAB;&#x7684;&#xFF0C;&#x6240;&#x4EE5;&#x5373;&#x4F7F;&#x662F;&#x7ECF;&#x5E38;&#x6267;&#x884C;&#x7684;&#x7A0B;&#x5E8F;(&#x5982;&#x6587;&#x672C;&#x7F16;&#x8F91;&#x7A0B;&#x5E8F;&#x3001; C&#x7F16;&#x8BD1;&#x7A0B;&#x5E8F;&#x3001; shell&#x7B49;)&#x5728;&#x5B58;&#x50A8;&#x5668;&#x4E2D;&#x4E5F;&#x53EA;&#x9700;&#x6709;&#x4E00;&#x4E2A;&#x526F;&#x672C;&#xFF0C;&#x53E6;&#x5916;&#xFF0C;&#x6B63;&#x6587;&#x6BB5;&#x5E38;&#x5E38;&#x662F;&#x53EA;&#x8BFB;&#x7684;&#xFF0C;&#x4EE5;&#x9632;&#x6B62;&#x7A0B;&#x5E8F;&#x7531;&#x4E8E;&#x610F;&#x5916;&#x4E8B;&#x6545;&#x800C;&#x4FEE;&#x6539;&#x5176;&#x81EA;&#x8EAB;&#x7684;&#x6307;&#x4EE4;&#x3002;</li>
+<li><code>&#x521D;&#x59CB;&#x5316;&#x6570;&#x636E;&#x6BB5;</code>&#x3002;&#x901A;&#x5E38;&#x5C06;&#x6B64;&#x6BB5;&#x79F0;&#x4E3A;&#x6570;&#x636E;&#x6BB5;&#xFF0C;&#x5B83;&#x5305;&#x542B;&#x4E86;&#x7A0B;&#x5E8F;&#x4E2D;&#x9700;&#x8D4B;&#x521D;&#x503C;&#x7684;&#x53D8;&#x91CF;&#x3002;&#x4F8B;&#x5982;&#xFF0C; C&#x7A0B;&#x5E8F;&#x4E2D;&#x4EFB;&#x4F55;&#x51FD;&#x6570;&#x4E4B;&#x5916;&#x7684;&#x8BF4;&#x660E;&#xFF1A;int maxcount = 99;&#x4F7F;&#x6B64;&#x53D8;&#x91CF;&#x4EE5;&#x521D;&#x503C;&#x5B58;&#x653E;&#x5728;&#x521D;&#x59CB;&#x5316;&#x6570;&#x636E;&#x6BB5;&#x4E2D;&#x3002;</li>
+<li><code>&#x975E;&#x521D;&#x59CB;&#x5316;&#x6570;&#x636E;&#x6BB5;</code>&#x3002;&#x901A;&#x5E38;&#x5C06;&#x6B64;&#x6BB5;&#x79F0;&#x4E3A; b s s&#x6BB5;&#xFF0C;&#x8FD9;&#x4E00;&#x540D;&#x79F0;&#x6765;&#x6E90;&#x4E8E;&#x65E9;&#x671F;&#x6C47;&#x7F16;&#x7A0B;&#x5E8F;&#x7684;&#x4E00;&#x4E2A;&#x64CD;&#x4F5C;&#x7B26;&#xFF0C;&#x610F;&#x601D;&#x662F;&#x201C;block started by symbol&#xFF08;&#x7531;&#x7B26;&#x53F7;&#x5F00;&#x59CB;&#x7684;&#x5757;&#xFF09;&#x201D;&#xFF0C;&#x5728;&#x7A0B;&#x5E8F;&#x5F00;&#x59CB;&#x6267;&#x884C;&#x4E4B;&#x524D;&#xFF0C;&#x5185;&#x6838;&#x5C06;&#x6B64;&#x6BB5;&#x521D;&#x59CB;&#x5316;&#x4E3A;0&#x3002;&#x51FD;&#x6570;&#x5916;&#x7684;&#x8BF4;&#x660E;&#xFF1A;long sum[1000] ;&#x4F7F;&#x6B64;&#x53D8;&#x91CF;&#x5B58;&#x653E;&#x5728;&#x975E;&#x521D;&#x59CB;&#x5316;&#x6570;&#x636E;&#x6BB5;&#x4E2D;&#x3002;</li>
+<li><code>&#x6808;</code>&#x3002;&#x81EA;&#x52A8;&#x53D8;&#x91CF;&#x4EE5;&#x53CA;&#x6BCF;&#x6B21;&#x51FD;&#x6570;&#x8C03;&#x7528;&#x65F6;&#x6240;&#x9700;&#x4FDD;&#x5B58;&#x7684;&#x4FE1;&#x606F;&#x90FD;&#x5B58;&#x653E;&#x5728;&#x6B64;&#x6BB5;&#x4E2D;&#x3002;&#x6BCF;&#x6B21;&#x51FD;&#x6570;&#x8C03;&#x7528;&#x65F6;&#xFF0C;&#x5176;&#x8FD4;&#x56DE;&#x5730;&#x5740;&#x3001;&#x4EE5;&#x53CA;&#x8C03;&#x7528;&#x8005;&#x7684;&#x73AF;&#x5883;&#x4FE1;&#x606F;&#xFF08;&#x4F8B;&#x5982;&#x67D0;&#x4E9B;&#x673A;&#x5668;&#x5BC4;&#x5B58;&#x5668;&#xFF09;&#x90FD;&#x5B58;&#x653E;&#x5728;&#x6808;&#x4E2D;&#x3002;&#x7136;&#x540E;&#xFF0C;&#x65B0;&#x88AB;&#x8C03;&#x7528;&#x7684;&#x51FD;&#x6570;&#x5728;&#x6808;&#x4E0A;&#x4E3A;&#x5176;&#x81EA;&#x52A8;&#x548C;&#x4E34;&#x65F6;&#x53D8;&#x91CF;&#x5206;&#x914D;&#x5B58;&#x50A8;&#x7A7A;&#x95F4;&#x3002;&#x901A;&#x8FC7;&#x4EE5;&#x8FD9;&#x79CD;&#x65B9;&#x5F0F;&#x4F7F;&#x7528;&#x6808;&#xFF0C; C&#x51FD;&#x6570;&#x53EF;&#x4EE5;&#x9012;&#x5F52;&#x8C03;&#x7528;&#x3002;</li>
+<li><code>&#x5806;</code>&#x3002;&#x901A;&#x5E38;&#x5728;&#x5806;&#x4E2D;&#x8FDB;&#x884C;&#x52A8;&#x6001;&#x5B58;&#x50A8;&#x5206;&#x914D;&#x3002;&#x7531;&#x4E8E;&#x5386;&#x53F2;&#x4E0A;&#x5F62;&#x6210;&#x7684;&#x60EF;&#x4F8B;&#xFF0C;&#x5806;&#x4F4D;&#x4E8E;&#x975E;&#x521D;&#x59CB;&#x5316;&#x6570;&#x636E;&#x6BB5;&#x9876;&#x548C;&#x6808;&#x5E95;&#x4E4B;&#x95F4;&#x3002;</li>
 </ul>
-</li>
-<li>timenow = localtime(&amp;now);<ul>
-<li>&#x8F6C;&#x5316;&#x4E3A;&#x4E00;&#x4E2A;&#x7ED3;&#x6784;&#x4F53;&#xFF0C;&#x7ED3;&#x6784;&#x4F53;&#x6210;&#x5458;&#x5305;&#x62EC;&#x5341;&#x5206;&#x6708;&#x65E5;&#x5E74;</li>
+<h3 id="&#x5185;&#x5B58;&#x56DB;&#x533A;"><a href="#&#x5185;&#x5B58;&#x56DB;&#x533A;" class="headerlink" title="&#x5185;&#x5B58;&#x56DB;&#x533A;"></a>&#x5185;&#x5B58;&#x56DB;&#x533A;</h3><ul>
+<li>&#x4EE3;&#x7801;&#x533A;</li>
+<li>&#x5168;&#x5C40;&#x533A;&#xFF08;&#x521D;&#x59CB;&#x5316;&#x6570;&#x636E;&#x6BB5;+&#x672A;&#x521D;&#x59CB;&#x5316;&#x6570;&#x636E;&#x6BB5;&#xFF09;</li>
+<li>&#x6808;&#x533A;</li>
+<li>&#x5806;&#x533A;</li>
 </ul>
-</li>
-<li>asctime_r(timenow,strtemp);&#x6216;asctime(timenow);<ul>
-<li>&#x5C06;&#x7ED3;&#x6784;&#x4F53;&#x8F6C;&#x5316;&#x4E3A;&#x5B57;&#x7B26;&#x4E32;</li>
-</ul>
-</li>
-</ol>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;time.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">{</div><div class="line">    <span class="keyword">time_t</span> now;   </div><div class="line">    <span class="keyword">struct</span> tm *timenow;   </div><div class="line">    <span class="keyword">char</span> strtemp[<span class="number">255</span>];   </div><div class="line">    <span class="keyword">char</span> *str_time;</div><div class="line"></div><div class="line">	time(&amp;now);   </div><div class="line">    <span class="built_in">printf</span>(<span class="string">&quot;time is : %ld \n&quot;</span>, now);  </div><div class="line">    timenow = localtime(&amp;now);   </div><div class="line">    str_time = asctime(timenow);<span class="comment">//&#x4E0D;&#x5B89;&#x5168;&#x7248;&#x672C;</span></div><div class="line">    asctime_r(timenow,strtemp);<span class="comment">//&#x5B89;&#x5168;&#x7248;</span></div></pre></td></tr></table></figure>
-<h2 id="asctime-r&#x548C;asctime&#x6CE8;&#x610F;&#x4E8B;&#x9879;&#xFF0C;&#x5BF9;&#x6BD4;"><a href="#asctime-r&#x548C;asctime&#x6CE8;&#x610F;&#x4E8B;&#x9879;&#xFF0C;&#x5BF9;&#x6BD4;" class="headerlink" title="asctime_r&#x548C;asctime&#x6CE8;&#x610F;&#x4E8B;&#x9879;&#xFF0C;&#x5BF9;&#x6BD4;"></a>asctime_r&#x548C;asctime&#x6CE8;&#x610F;&#x4E8B;&#x9879;&#xFF0C;&#x5BF9;&#x6BD4;</h2><p>asctime_r&#x548C;asctime_r&#x5BF9;&#x6BD4;&#xFF0C;&#x4F1A;&#x611F;&#x89C9;asctime&#x6709;&#x5185;&#x5B58;&#x6CC4;&#x6F0F;&#x7684;&#x53EF;&#x80FD;&#xFF0C;&#x5176;&#x5B9E;&#x5E76;&#x4E0D;&#x4F1A;&#x5185;&#x5B58;&#x6CC4;&#x6F0F;&#x4F46;&#x6709;&#x4E00;&#x5B9A;&#x4E0D;&#x53EF;&#x63A7;&#x6027;<br>asctime&#x8FD4;&#x56DE;&#x7684;&#x5730;&#x5740;&#x662F;&#x4E00;&#x5757;&#x9759;&#x6001;&#x5730;&#x5740;&#xFF0C;&#x7B49;&#x4E0B;&#x6B21;&#x8C03;&#x7528;asctime&#x8FD4;&#x56DE;&#x7684;&#x8FD8;&#x662F;&#x8FD9;&#x5757;&#x5730;&#x5740;&#xFF0C;&#x56E0;&#x6B64;&#x5E76;&#x4E0D;&#x4F1A;&#x5185;&#x5B58;&#x6CC4;&#x6F0F;&#xFF0C;&#x4F46;&#x662F;&#x6709;&#x4E00;&#x5B9A;&#x4E0D;&#x53EF;&#x63A7;&#x6027;&#xFF0C;&#x6BD4;&#x5982;&#x4F7F;&#x7528;&#x4E86;&#x5206;&#x522B;&#x83B7;&#x53D6;&#x4E86;&#x4E24;&#x6B21;&#x5F53;&#x524D;&#x4E16;&#x754C;&#x51FD;&#x6570;&#xFF0C;&#x7136;&#x540E;&#x518D;&#x8BFB;&#x53D6;&#x5C31;&#x4F1A;&#x53D1;&#x73B0;&#x4E24;&#x6B21;&#x65F6;&#x95F4;&#x76F8;&#x540C;&#xFF0C;eg:</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;time.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">{</div><div class="line">    <span class="keyword">time_t</span> now;   </div><div class="line">    <span class="keyword">struct</span> tm *timenow;   </div><div class="line">    <span class="keyword">char</span> strtemp[<span class="number">255</span>];   </div><div class="line">    <span class="keyword">char</span> *str_time;</div><div class="line">    <span class="keyword">char</span> *str_time2;</div><div class="line">    </div><div class="line">    <span class="comment">//&#x7B2C;&#x4E00;&#x6B21;&#x83B7;&#x53D6;&#x5F53;&#x524D;&#x65F6;&#x95F4;</span></div><div class="line">    time(&amp;now);   </div><div class="line">    <span class="built_in">printf</span>(<span class="string">&quot;time is : %ld \n&quot;</span>, now);  </div><div class="line">    timenow = localtime(&amp;now);   </div><div class="line">    str_time = asctime(timenow);<span class="comment">//&#x4E0D;&#x5B89;&#x5168;&#x7248;&#x672C;</span></div><div class="line">    <span class="built_in">printf</span>(<span class="string">&quot;local time is : %s \n&quot;</span>, str_time);  </div><div class="line">    sleep(<span class="number">1</span>);</div><div class="line">    <span class="comment">//&#x7B2C;&#x4E8C;&#x6B21;&#x83B7;&#x53D6;&#x5F53;&#x524D;&#x65F6;&#x95F4;</span></div><div class="line">    time(&amp;now);   </div><div class="line">    timenow = localtime(&amp;now);   </div><div class="line">    str_time2 = asctime(timenow);<span class="comment">//&#x4E0D;&#x5B89;&#x5168;&#x7248;&#x672C;</span></div><div class="line">    <span class="comment">//&#x6253;&#x5370;str_time1 &#x548C;str_time2 &#x53D1;&#x73B0;&#x7ED3;&#x679C;&#x76F8;&#x540C;</span></div><div class="line">    <span class="built_in">printf</span>(<span class="string">&quot;local time1 is : %s \n&quot;</span>, str_time);  </div><div class="line">    <span class="built_in">printf</span>(<span class="string">&quot;local time2 is : %s \n&quot;</span>, str_time2);  </div><div class="line">    <span class="comment">//free(str_time);//&#x5982;&#x679C;&#x91CA;&#x653E;&#x4F1A;&#x51FA;&#x9519;</span></div><div class="line">    asctime_r(timenow,strtemp);</div><div class="line">    <span class="built_in">printf</span>(<span class="string">&quot;local time is : %s \n&quot;</span>, strtemp);  </div><div class="line"></div><div class="line">}</div></pre></td></tr></table></figure>
+
       
     </div>
 
@@ -344,7 +349,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Linuxc/" rel="tag">#Linuxc</a>
+            <a href="/tags/linuxc/" rel="tag">#linuxc</a>
+          
+            <a href="/tags/基础知识/" rel="tag">#基础知识</a>
           
         </div>
       
@@ -353,16 +360,16 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/11/01/linux高级编程-多线程/" rel="next" title="linux高级编程-多线程">
-                <i class="fa fa-chevron-left"></i> linux高级编程-多线程
+              <a href="/2017/03/03/多进程与多线程共享数据区/" rel="next" title="多进程与多线程共享数据区">
+                <i class="fa fa-chevron-left"></i> 多进程与多线程共享数据区
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2016/11/09/centos7下mysql的安装和使用/" rel="prev" title="centos7下mysql的安装和使用">
-                centos7下mysql的安装和使用 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/03/08/动态库与静态库/" rel="prev" title="动态库与静态库">
+                动态库与静态库 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -502,7 +509,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Linux获取系统时间c函数注意事项"><span class="nav-number">1.</span> <span class="nav-text">Linux获取系统时间c函数注意事项</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#获取当前时间"><span class="nav-number">1.1.</span> <span class="nav-text">获取当前时间</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#asctime-r和asctime注意事项，对比"><span class="nav-number">1.2.</span> <span class="nav-text">asctime_r和asctime注意事项，对比</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#c程序内存四区"><span class="nav-number">1.</span> <span class="nav-text">c程序内存四区</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#内存分布（引自APUE-7-5）"><span class="nav-number">1.1.</span> <span class="nav-text">内存分布（引自APUE.7-5）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#内存四区"><span class="nav-number">1.1.1.</span> <span class="nav-text">内存四区</span></a></li></ol></li></ol></li></ol></div>
             
           </div>
         </section>
